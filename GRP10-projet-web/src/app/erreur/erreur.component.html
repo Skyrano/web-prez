@@ -1,4 +1,4 @@
-<div id="error_container">
-    <p id="error_message"> {{ error_msg }}</p>
-    <i class="fa fa-close" onclick="close_error()"></i>
+<div id="error_container" *ngIf="!manager.closed">
+    <p id="error_message"> {{ manager.error_message }}</p>
+    <i class="fa fa-close" (click)="manager.close_error()"></i>
 </div>

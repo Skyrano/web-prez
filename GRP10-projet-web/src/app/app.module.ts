@@ -7,6 +7,7 @@ import { MenuComponent } from './menu/menu.component';
 import { ErreurComponent } from './erreur/erreur.component';
 import { MainComponent } from './main/main.component';
 import { FootComponent } from './foot/foot.component';
+import { ErrorManager } from './services/error.service';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,9 @@ import { FootComponent } from './foot/foot.component';
     BrowserModule,
     AppRoutingModule
   ],
-  providers: [],
+  providers: [
+    ErrorManager
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
