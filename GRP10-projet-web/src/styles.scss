@@ -1,1 +1,37 @@
-/* You can add global styles to this file, and also import other style files */
+/* Projet Web
+Kiéran GOYAT
+Alistair RAMEAU
+Cybersécurité du logiciel
+1re année
+*/
+
+:root {
+	/* variable de couleur */
+	--main-color: #009BDB;
+	--light-color: #ffffff;
+	--medium-light-color: #a1e1f4;
+	--dark-color: #31565a;
+	--medium-dark-color: #007681;
+}
+
+html, body {
+    margin: 0px;
+    height: 100%;
+}
+
+body {
+    font-family: Arial, sans-serif;
+
+    /* affichage flex en colonne */
+	display: flex;
+    flex-direction: column;
+}
+
+.separator {
+	/* permet de séparer des éléments flex en prenant toute la taille possible */
+	flex: 1000;
+}
+
+.hidden {
+    display: none;
+}

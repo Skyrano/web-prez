@@ -1,0 +1,23 @@
+nav {
+    background-color: var(--medium-light-color);
+
+    /* affichage flex en ligne avec retour ligne */
+	display: flex;
+	flex-direction: row;
+	justify-content: flex-end;
+	flex-wrap: wrap;
+}
+
+nav > a {
+    padding: 10px;
+    color: var(--medium-dark-color);
+    text-decoration: none;
+}
+
+nav > a:hover {
+    color: var(--dark-color);
+}
+
+nav > a > h2 {
+    margin: 0px;
+}

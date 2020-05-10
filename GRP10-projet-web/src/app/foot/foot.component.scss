@@ -1,0 +1,37 @@
+footer {
+    background-color: var(--medium-light-color);
+}
+
+#links {
+    width: 100%;
+
+    /* affichage flex en ligne avec retour ligne */
+	display: flex;
+	flex-direction: row;
+	justify-content: space-evenly;
+	flex-wrap: wrap;
+}
+
+#links > a {
+    padding: 10px;
+    color: var(--medium-dark-color);
+    text-decoration: none;
+}
+
+#links > a:hover {
+    color: var(--dark-color);
+}
+
+#links > a > h3 {
+    margin: 0px;
+}
+
+footer > p {
+    color: var(--medium-dark-color);
+    margin: 15px;
+}
+
+footer > p > a {
+    color: var(--dark-color);
+    text-decoration: none;
+}
