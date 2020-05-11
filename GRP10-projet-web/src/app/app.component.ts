@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ErrorManager } from './services/error.service';
 
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -8,6 +9,7 @@ import { ErrorManager } from './services/error.service';
 })
 export class AppComponent implements OnInit {
   title = 'GRP10-projet-web';
+
 
   constructor(private errorManager: ErrorManager) {}
 
