@@ -12,6 +12,8 @@ import { ContactComponent } from './contact/contact.component';
 import { AideComponent } from './aide/aide.component';
 import { FourOfourComponent } from './four-ofour/four-ofour.component';
 import { MentionLegalesComponent } from './mention-legales/mention-legales.component';
+import { CandidatsComponent } from './candidats/candidats.component';
+import { CandidatComponent } from './candidat/candidat.component';
 import { HttpClientModule } from "@angular/common/http";
 import { HttpClientService } from './services/httpclient.service';
 import { MapComponent } from './map/map.component';
@@ -27,7 +29,9 @@ import { MapComponent } from './map/map.component';
     AideComponent,
     FourOfourComponent,
     MentionLegalesComponent,
-    MapComponent
+    MapComponent,
+    CandidatsComponent,
+    CandidatComponent
   ],
   imports: [
     BrowserModule,

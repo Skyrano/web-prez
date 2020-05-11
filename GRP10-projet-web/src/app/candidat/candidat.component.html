@@ -1,0 +1,11 @@
+<div>
+    <div class="candidat">
+        <p>{{ candidat.name }} : </p>
+        <div class="separator"></div>
+        <p>{{ candidat.voix }} voix / {{ candidat.pourcentage }} %</p>
+    </div>
+
+    <div class="candidat_bar">
+        <div class="candidat_inner_bar" [ngStyle]="{width: getPourcentage()}"></div>
+    </div>
+</div>

@@ -12,17 +12,17 @@ footer {
 	flex-wrap: wrap;
 }
 
-#links > a {
+#links > div > a {
     padding: 10px;
     color: var(--medium-dark-color);
     text-decoration: none;
 }
 
-#links > a:hover {
+#links > div > a:hover {
     color: var(--dark-color);
 }
 
-#links > a > h3 {
+#links > div > a > h3 {
     margin: 0px;
 }
 
