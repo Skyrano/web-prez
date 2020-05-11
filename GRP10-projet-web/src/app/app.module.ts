@@ -12,6 +12,8 @@ import { ContactComponent } from './contact/contact.component';
 import { AideComponent } from './aide/aide.component';
 import { FourOfourComponent } from './four-ofour/four-ofour.component';
 import { MentionLegalesComponent } from './mention-legales/mention-legales.component';
+import { HttpClientModule } from "@angular/common/http";
+import { HttpClientService } from './services/httpclient.service';
 
 @NgModule({
   declarations: [
@@ -27,10 +29,12 @@ import { MentionLegalesComponent } from './mention-legales/mention-legales.compo
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpClientModule
   ],
   providers: [
-    ErrorManager
+    ErrorManager,
+    HttpClientService
   ],
   bootstrap: [AppComponent]
 })
