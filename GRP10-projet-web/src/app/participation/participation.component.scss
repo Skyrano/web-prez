@@ -1,0 +1,51 @@
+.participation {
+    /* for test */
+    width : 300px;
+    border: 1px solid black;
+    margin: 20px;
+
+
+    padding: 10px;
+}
+
+.participation > h3 {
+    margin: 0px;
+    color: var(--medium-dark-color);
+}
+
+.participation_infos {
+    margin-top: 10px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
+
+.participation_info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.participation_info > p {
+    margin: 0px;
+    color: var(--medium-dark-color);
+}
+
+.participation_bar {
+    border: 1px solid var(--dark-color);
+    width: 100%;
+    height: 20px;
+}
+
+.participation_inner_bar {
+    background-color: var(--dark-color);
+    height: 100%;
+}
+
+.participation_inner_bar > p {
+    font-size: 100%;
+    color: var(--light-color);
+    margin: 0px;
+    text-align: right;
+    padding-right: 5px;
+}

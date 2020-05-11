@@ -27,6 +27,14 @@ export class MainComponent implements OnInit {
     }
   ];
 
+  participation = {
+    pourcentage: 90,
+    inscrits: 6000,
+    blancs: 15,
+    nuls: 60,
+    exprimes: 5000
+  };
+
   dataSubscription: Subscription;
 
   data: any;

@@ -16,6 +16,7 @@ import { CandidatsComponent } from './candidats/candidats.component';
 import { CandidatComponent } from './candidat/candidat.component';
 import { HttpClientModule } from "@angular/common/http";
 import { HttpClientService } from './services/httpclient.service';
+import { ParticipationComponent } from './participation/participation.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,8 @@ import { HttpClientService } from './services/httpclient.service';
     FourOfourComponent,
     MentionLegalesComponent,
     CandidatsComponent,
-    CandidatComponent
+    CandidatComponent,
+    ParticipationComponent
   ],
   imports: [
     BrowserModule,
