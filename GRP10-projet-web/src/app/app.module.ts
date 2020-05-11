@@ -12,6 +12,8 @@ import { ContactComponent } from './contact/contact.component';
 import { AideComponent } from './aide/aide.component';
 import { FourOfourComponent } from './four-ofour/four-ofour.component';
 import { MentionLegalesComponent } from './mention-legales/mention-legales.component';
+import { CandidatsComponent } from './candidats/candidats.component';
+import { CandidatComponent } from './candidat/candidat.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +25,9 @@ import { MentionLegalesComponent } from './mention-legales/mention-legales.compo
     ContactComponent,
     AideComponent,
     FourOfourComponent,
-    MentionLegalesComponent
+    MentionLegalesComponent,
+    CandidatsComponent,
+    CandidatComponent
   ],
   imports: [
     BrowserModule,

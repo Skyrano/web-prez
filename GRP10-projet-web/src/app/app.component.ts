@@ -7,6 +7,7 @@ import { ErrorManager } from './services/error.service';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
+
   title = 'GRP10-projet-web';
 
   constructor(private errorManager: ErrorManager) {
