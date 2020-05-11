@@ -11,6 +11,7 @@ import { ErrorManager } from './services/error.service';
 import { ContactComponent } from './contact/contact.component';
 import { AideComponent } from './aide/aide.component';
 import { FourOfourComponent } from './four-ofour/four-ofour.component';
+import { MentionLegalesComponent } from './mention-legales/mention-legales.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { FourOfourComponent } from './four-ofour/four-ofour.component';
     FootComponent,
     ContactComponent,
     AideComponent,
-    FourOfourComponent
+    FourOfourComponent,
+    MentionLegalesComponent
   ],
   imports: [
     BrowserModule,
