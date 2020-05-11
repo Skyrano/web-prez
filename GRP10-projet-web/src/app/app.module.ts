@@ -14,6 +14,7 @@ import { FourOfourComponent } from './four-ofour/four-ofour.component';
 import { MentionLegalesComponent } from './mention-legales/mention-legales.component';
 import { HttpClientModule } from "@angular/common/http";
 import { HttpClientService } from './services/httpclient.service';
+import { MapComponent } from './map/map.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { HttpClientService } from './services/httpclient.service';
     ContactComponent,
     AideComponent,
     FourOfourComponent,
-    MentionLegalesComponent
+    MentionLegalesComponent,
+    MapComponent
   ],
   imports: [
     BrowserModule,
