@@ -10,6 +10,7 @@ import { FootComponent } from './foot/foot.component';
 import { ErrorManager } from './services/error.service';
 import { ContactComponent } from './contact/contact.component';
 import { AideComponent } from './aide/aide.component';
+import { FourOfourComponent } from './four-ofour/four-ofour.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { AideComponent } from './aide/aide.component';
     MainComponent,
     FootComponent,
     ContactComponent,
-    AideComponent
+    AideComponent,
+    FourOfourComponent
   ],
   imports: [
     BrowserModule,
