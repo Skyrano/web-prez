@@ -8,6 +8,8 @@ import { ErreurComponent } from './erreur/erreur.component';
 import { MainComponent } from './main/main.component';
 import { FootComponent } from './foot/foot.component';
 import { ErrorManager } from './services/error.service';
+import { ContactComponent } from './contact/contact.component';
+import { AideComponent } from './aide/aide.component';
 
 @NgModule({
   declarations: [
@@ -15,7 +17,9 @@ import { ErrorManager } from './services/error.service';
     MenuComponent,
     ErreurComponent,
     MainComponent,
-    FootComponent
+    FootComponent,
+    ContactComponent,
+    AideComponent
   ],
   imports: [
     BrowserModule,
