@@ -14,6 +14,8 @@ import { FourOfourComponent } from './four-ofour/four-ofour.component';
 import { MentionLegalesComponent } from './mention-legales/mention-legales.component';
 import { CandidatsComponent } from './candidats/candidats.component';
 import { CandidatComponent } from './candidat/candidat.component';
+import { HttpClientModule } from "@angular/common/http";
+import { HttpClientService } from './services/httpclient.service';
 
 @NgModule({
   declarations: [
@@ -31,10 +33,12 @@ import { CandidatComponent } from './candidat/candidat.component';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpClientModule
   ],
   providers: [
-    ErrorManager
+    ErrorManager,
+    HttpClientService
   ],
   bootstrap: [AppComponent]
 })

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ErrorManager } from './services/error.service';
 
 @Component({
@@ -6,11 +6,12 @@ import { ErrorManager } from './services/error.service';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent {
-
+export class AppComponent implements OnInit {
   title = 'GRP10-projet-web';
 
-  constructor(private errorManager: ErrorManager) {
+  constructor(private errorManager: ErrorManager) {}
+
+   ngOnInit() {
     setTimeout(
       () => {
         this.errorManager.print_error("je ne suis pas une erreur");
