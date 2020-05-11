@@ -22,15 +22,13 @@ export class HttpClientService {
   loadDataFromServer() {
     this.httpClient.get(this.datalink).subscribe(
       (response) => {
-        console.log("On recoit la réponse")
         this.data = response;
+        this.emitData();
       },
       (error) => {
-        console.error("Erreur : ");
         console.log(error);
       }
     );
-    this.emitData();
   }
 
 }

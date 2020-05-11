@@ -19,7 +19,6 @@ export class MainComponent implements OnInit {
     this.dataSubscription = this.httpClientService.dataSubject.subscribe(
       (serverdata: any) => {
         this.data = serverdata;
-        console.log("On a recu les données : ")
         console.log(this.data);
       }
     );
@@ -29,5 +28,6 @@ export class MainComponent implements OnInit {
   fetchData() {
     this.httpClientService.loadDataFromServer();
   }
+
 
 }
