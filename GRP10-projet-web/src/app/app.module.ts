@@ -18,6 +18,7 @@ import { HttpClientModule } from "@angular/common/http";
 import { HttpClientService } from './services/httpclient.service';
 import { ParticipationComponent } from './participation/participation.component';
 import { MapComponent } from './map/map.component';
+import { DataRefinerService } from './services/dataRefiner.service';
 
 @NgModule({
   declarations: [
@@ -42,7 +43,8 @@ import { MapComponent } from './map/map.component';
   ],
   providers: [
     ErrorManager,
-    HttpClientService
+    HttpClientService,
+    DataRefinerService
   ],
   bootstrap: [AppComponent]
 })

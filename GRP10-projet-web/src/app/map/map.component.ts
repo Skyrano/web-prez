@@ -13,13 +13,13 @@ export class MapComponent implements OnInit {
   ngOnInit() {
 
       //----Fonctions d'exemple d'utilisation de la map, c'est pas compliqué à utiliser, ca devrait pas être dur de ping des bureaux cliquables sur la carte (faudra juste chopper les coordonnées dans le JSON)
-      var mymap = L.map('map').setView([51.505, -0.09], 13);
+      var mymap = L.map('map').setView([48.111707, -1.675811], 17);
 
       L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
           attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
       }).addTo(mymap);
 
-      var marker = L.marker([51.5, -0.09]).addTo(mymap);
+      var marker = L.marker([48.111707, -1.675811]).addTo(mymap);
 
       var circle = L.circle([51.508, -0.11], {
         color: 'red',
@@ -39,7 +39,7 @@ export class MapComponent implements OnInit {
     polygon.bindPopup("I am a polygon.");
 
     var popup = L.popup()
-    .setLatLng([51.5, -0.09])
+    .setLatLng([48.111707, -1.675811])
     .setContent("I am a standalone popup.")
     .openOn(mymap);
 

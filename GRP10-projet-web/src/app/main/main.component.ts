@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClientService } from '../services/httpclient.service';
 import { Subscription } from 'rxjs';
+import { DataRefinerService } from '../services/dataRefiner.service';
 
 @Component({
   selector: 'app-main',
@@ -39,20 +40,19 @@ export class MainComponent implements OnInit {
 
   data: any;
 
-  constructor(private httpClientService: HttpClientService) { }
+  constructor(private dataRefinerService: DataRefinerService) { }
 
   ngOnInit(): void {
-    this.dataSubscription = this.httpClientService.dataSubject.subscribe(
+    this.dataSubscription = this.dataRefinerService.dataSubject.subscribe(
       (serverdata: any) => {
         this.data = serverdata;
         console.log(this.data);
       }
     );
-    this.httpClientService.loadDataFromServer();
   }
 
   fetchData() {
-    this.httpClientService.loadDataFromServer();
+    this.dataRefinerService.fetchData();
   }
 
 
