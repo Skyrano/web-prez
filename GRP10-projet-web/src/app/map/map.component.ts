@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Subscription } from 'rxjs';
+import { DataRefinerService } from '../services/dataRefiner.service';
 declare let L;
 
 @Component({
@@ -8,51 +10,52 @@ declare let L;
 })
 export class MapComponent implements OnInit {
 
-  constructor() { }
+
+  bureauxSubscription: Subscription;
+
+  bureaux: Array<any>;
+
+  mymap: any;
+
+  circles = Array<any>();
+
+  constructor(private dataRefinerService: DataRefinerService) { }
+
 
   ngOnInit() {
+      this.bureauxSubscription = this.dataRefinerService.bureauxSubject.subscribe(
+        (refinedData: any) => {
+          this.bureaux = refinedData;
+          this.mapInit();
+        }
+      );
+      }
+  mapInit() {
+    //----Fonctions d'exemple d'utilisation de la map, c'est pas compliqué à utiliser, ca devrait pas être dur de ping des bureaux cliquables sur la carte (faudra juste chopper les coordonnées dans le JSON)
 
-      //----Fonctions d'exemple d'utilisation de la map, c'est pas compliqué à utiliser, ca devrait pas être dur de ping des bureaux cliquables sur la carte (faudra juste chopper les coordonnées dans le JSON)
-      var mymap = L.map('map').setView([48.111707, -1.675811], 17);
+    this.mymap = L.map('map').setView([48.111707, -1.675811], 13);
 
-      L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-          attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-      }).addTo(mymap);
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+    }).addTo(this.mymap);
 
-      var marker = L.marker([48.111707, -1.675811]).addTo(mymap);
 
-      var circle = L.circle([51.508, -0.11], {
+
+    for (let i = 0; i < this.bureaux.length; i++) {
+      console.log(this.bureaux[i])
+      console.log([48.111707, -1.675811]);
+      this.circles.push(L.circle(this.bureaux[i], {
         color: 'red',
         fillColor: '#f03',
-        fillOpacity: 0.5,
-        radius: 500
-    }).addTo(mymap);
-
-    var polygon = L.polygon([
-      [51.509, -0.08],
-      [51.503, -0.06],
-      [51.51, -0.047]
-    ]).addTo(mymap);
-
-    marker.bindPopup("<b>Hello world!</b><br>I am a popup.").openPopup();
-    circle.bindPopup("I am a circle.");
-    polygon.bindPopup("I am a polygon.");
-
-    var popup = L.popup()
-    .setLatLng([48.111707, -1.675811])
-    .setContent("I am a standalone popup.")
-    .openOn(mymap);
-
-    function onMapClick(e) {
-      popup
-          .setLatLng(e.latlng)
-          .setContent("You clicked the map at " + e.latlng.toString())
-          .openOn(mymap);
+        fillOpacity: 0.01,
+        radius: 50
+    }))
     }
 
-    mymap.on('click', onMapClick);
 
-}
-
+    this.circles[0].addTo(this.mymap);
+    this.circles[1].addTo(this.mymap);
+    //this.circles[2].addTo(this.mymap);
+  }
 
 }

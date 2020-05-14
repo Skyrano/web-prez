@@ -8,27 +8,52 @@ export class DataRefinerService {
 
   rawDataSubscription: Subscription;
 
-  dataSubject = new Subject<any>();
+  fullData: any;
 
-  data: any;
+  bureaux: Array<any>;
+
+  fullDataSubject = new Subject<any>();
+
+  bureauxSubject = new Subject<Array<any>>();
+
+
 
   constructor(private httpClientService: HttpClientService) {
     this.rawDataSubscription = this.httpClientService.rawDataSubject.subscribe(
       (serverdata: any) => {
-        this.data = serverdata;
-        this.emitData();
+        this.refineData(serverdata);
+        this.emitAllData();
       }
     );
     this.httpClientService.loadDataFromServer();
   }
 
-  emitData() {
-    this.dataSubject.next(this.data);
+  emitAllData() {
+    this.fullDataSubject.next(this.fullData);
+    this.bureauxSubject.next(this.bureaux);
   }
 
   fetchData() {
     this.httpClientService.loadDataFromServer();
-    this.emitData();
+    this.emitAllData();
+  }
+
+  refineData(rawdata: any) {
+    this.fullData = rawdata;
+    this.bureaux = new Array();
+
+    for (let i = 0; i < 10 ; i++) {
+      try {
+        this.bureaux.push(rawdata.records[i].fields.geo_point);
+      } catch (error) {
+        console.log(error);
+      }
+    }
+
+
+
+
+
   }
 
 }
