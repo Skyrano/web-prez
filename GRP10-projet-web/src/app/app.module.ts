@@ -19,6 +19,9 @@ import { HttpClientService } from './services/httpclient.service';
 import { ParticipationComponent } from './participation/participation.component';
 import { MapComponent } from './map/map.component';
 import { DataRefinerService } from './services/dataRefiner.service';
+import { SelectAnneeTourComponent } from './select-annee-tour/select-annee-tour.component';
+import { FormsModule } from '@angular/forms';
+
 
 @NgModule({
   declarations: [
@@ -34,12 +37,14 @@ import { DataRefinerService } from './services/dataRefiner.service';
     MapComponent,
     CandidatsComponent,
     CandidatComponent,
-    ParticipationComponent
+    ParticipationComponent,
+    SelectAnneeTourComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    FormsModule
   ],
   providers: [
     ErrorManager,
