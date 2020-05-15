@@ -1,0 +1,26 @@
+#contact {
+}
+
+.person {
+    margin: 20px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap-reverse;
+}
+
+.person-texte {
+    color: var(--medium-dark-color);
+}
+
+.person-texte > p > a {
+    color: var(--dark-color);
+}
+
+.person-img {
+    margin: 10px;
+}
+
+.person-img > img {
+    height: 100%;
+    max-height: 100px;
+}
