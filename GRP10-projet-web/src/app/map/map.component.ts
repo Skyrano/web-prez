@@ -17,8 +17,6 @@ export class MapComponent implements OnInit {
 
   mymap: any;
 
-  circles = Array<any>();
-
   constructor(private dataRefinerService: DataRefinerService) { }
 
 
@@ -30,8 +28,9 @@ export class MapComponent implements OnInit {
         }
       );
       }
+
+
   mapInit() {
-    //----Fonctions d'exemple d'utilisation de la map, c'est pas compliqué à utiliser, ca devrait pas être dur de ping des bureaux cliquables sur la carte (faudra juste chopper les coordonnées dans le JSON)
 
     this.mymap = L.map('map').setView([48.111707, -1.675811], 13);
 
@@ -42,20 +41,14 @@ export class MapComponent implements OnInit {
 
 
     for (let i = 0; i < this.bureaux.length; i++) {
-      console.log(this.bureaux[i])
-      console.log([48.111707, -1.675811]);
-      this.circles.push(L.circle(this.bureaux[i], {
+      console.log(this.bureaux[i]);
+      L.circle(this.bureaux[i], {
         color: 'red',
         fillColor: '#f03',
         fillOpacity: 0.01,
         radius: 50
-    }))
+      }).addTo(this.mymap);
     }
-
-
-    this.circles[0].addTo(this.mymap);
-    this.circles[1].addTo(this.mymap);
-    //this.circles[2].addTo(this.mymap);
   }
 
 }

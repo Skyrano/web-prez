@@ -43,10 +43,8 @@ export class DataRefinerService {
     this.bureaux = new Array();
 
     for (let i = 0; i < 10 ; i++) {
-      try {
+      if (rawdata.records[i].fields.hasOwnProperty('geo_point')) {
         this.bureaux.push(rawdata.records[i].fields.geo_point);
-      } catch (error) {
-        console.log(error);
       }
     }
 
