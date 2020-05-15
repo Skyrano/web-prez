@@ -2,7 +2,7 @@
 FROM angular/ngcontainer
 
 # Set the working directory.
-WORKDIR /
+WORKDIR /usr/src
 
 # Copy the file from your host to your current location.
 COPY package.json .
@@ -11,7 +11,7 @@ COPY package.json .
 RUN npm install
 
 # Inform Docker that the container is listening on the specified port at runtime.
-EXPOSE 8080
+EXPOSE 4200
 
 # Run the specified command within the container.
 CMD [ "ng", "serve"]
