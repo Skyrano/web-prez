@@ -1,9 +1,24 @@
-<app-select-annee-tour></app-select-annee-tour>
+<app-select-annee-tour (newAnneeTourEvent)="changeAnneeTour($event)"></app-select-annee-tour>
 
-<app-map></app-map>
+<div id="infos_principales">
+    <app-map></app-map>
 
-<app-candidats [candidats]="candidats"></app-candidats>
-<app-participation [participation]="participation"></app-participation>
+    <div id="infos_zone">
+        <h3>Nom de la zone</h3>
+        <app-participation [participation]="participation_zone"></app-participation>
+        <app-candidats [candidats]="candidats_zone"></app-candidats>
+    </div>
+
+    <div id="infos_centre">
+        <app-select-bureau [bureaux]="bureaux" (newBureauEvent)="changeBureau($event)"></app-select-bureau>
+        <app-participation *ngIf="bureau_selected != ''" [participation]="participation_bureau"></app-participation>
+        <app-candidats *ngIf="bureau_selected != ''" [candidats]="candidats_bureau"></app-candidats>
+    </div>
+</div>
+
+
+
+
 
 <p>main works!</p>
 <p *ngIf="data != null" > {{data.nhits}} </p>

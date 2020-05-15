@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-select-annee-tour',
@@ -10,6 +10,8 @@ export class SelectAnneeTourComponent implements OnInit {
   annee_value = 2017;
   tour_value = 1;
 
+  @Output() newAnneeTourEvent = new EventEmitter();
+
   constructor() { }
 
   ngOnInit(): void {
@@ -17,6 +19,7 @@ export class SelectAnneeTourComponent implements OnInit {
 
   onChange(){
     console.log(this.annee_value + " " + this.tour_value);
+    this.newAnneeTourEvent.emit([this.annee_value, this.tour_value]);
   }
 
 }

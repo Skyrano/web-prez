@@ -21,6 +21,7 @@ import { MapComponent } from './map/map.component';
 import { DataRefinerService } from './services/dataRefiner.service';
 import { SelectAnneeTourComponent } from './select-annee-tour/select-annee-tour.component';
 import { FormsModule } from '@angular/forms';
+import { SelectBureauComponent } from './select-bureau/select-bureau.component';
 
 
 @NgModule({
@@ -38,7 +39,8 @@ import { FormsModule } from '@angular/forms';
     CandidatsComponent,
     CandidatComponent,
     ParticipationComponent,
-    SelectAnneeTourComponent
+    SelectAnneeTourComponent,
+    SelectBureauComponent
   ],
   imports: [
     BrowserModule,

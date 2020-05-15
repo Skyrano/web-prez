@@ -1,0 +1,25 @@
+#infos_principales {
+    display: flex;
+    flex-direction: row;
+    flex-flow: row wrap;
+
+    margin: 20px;
+}
+
+app-map {
+    width: 50%;
+    min-height: 300px;
+    
+  }
+
+#infos_zone {
+    margin-left: 20px;
+}
+
+#infos_centre {
+    margin-left: 20px;
+}
+
+#infos_zone > h3 {
+    color: var(--medium-dark-color);
+}
