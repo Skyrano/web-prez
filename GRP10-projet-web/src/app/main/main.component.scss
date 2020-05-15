@@ -9,6 +9,7 @@
 app-map {
     width: 50%;
     min-height: 300px;
+    margin-bottom: 20px;
     
   }
 
@@ -23,3 +24,21 @@ app-map {
 #infos_zone > h3 {
     color: var(--medium-dark-color);
 }
+
+@media screen and (max-width: 640px) {
+    #infos_principales {
+        flex-direction: column;
+    }
+
+    app-map {
+        width: 100%;
+    }
+
+    #infos_zone {
+        margin-left: 0px;
+    }
+    
+    #infos_centre {
+        margin-left: 0px;
+    }
+  }
