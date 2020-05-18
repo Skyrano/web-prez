@@ -6,11 +6,11 @@ import { Subject } from 'rxjs';
 
 export class HttpClientService {
 
-  rawDataSubject = new Subject<any>();
 
-  private datalink: string = "https://data.rennesmetropole.fr/api/records/1.0/search/?dataset=resultats-des-elections-presidentielles-a-rennes-depuis-2007&q=&facet=code_election&facet=nom_election&facet=numero_tour&facet=niveau_detail&facet=nom_lieu&facet=candidat_1&facet=candidat_2&facet=candidat_3&facet=candidat_4&facet=candidat_5&facet=candidat_6&facet=candidat_7&facet=candidat_8&facet=candidat_9&facet=candidat_10&facet=candidat_11&facet=candidat_12";
+  private datalink: string = "https://data.rennesmetropole.fr/api/records/1.0/search/?dataset=resultats-des-elections-presidentielles-a-rennes-depuis-2007&q=&rows=1000";
 
   private rawData: any;
+  rawDataSubject = new Subject<any>();
 
   constructor(private httpClient: HttpClient) {}
 
@@ -28,6 +28,33 @@ export class HttpClientService {
         console.log(error);
       }
     );
+  }
+
+  createLink(codeElection: string, numeroTour: string, niveauDetail: string,  nomLieu: string, candidats: Array<string>) {
+
+    var link = "https://data.rennesmetropole.fr/api/records/1.0/search/?dataset=resultats-des-elections-presidentielles-a-rennes-depuis-2007&q=&rows=1000";
+
+    if (codeElection != null) {
+      link+="&refine.code_election="+codeElection;
+    }
+    if (numeroTour != null) {
+      link+="&refine.numero_tour="+numeroTour;
+    }
+    if (niveauDetail != null) {
+      link+="&refine.niveau_detail="+niveauDetail;
+    }
+    if (nomLieu != null) {
+      link+="&refine.nom_lieu="+nomLieu;
+    }
+    if (candidats != null) {
+      for (let i = 0; i < candidats.length; i++) {
+        if (candidats[i] != null && candidats[i] != "") {
+          link+="&refine.candidat_"+(i+1).toString()+"="+candidats[i];
+        }
+      }
+    }
+
+    this.datalink = link;
   }
 
 }

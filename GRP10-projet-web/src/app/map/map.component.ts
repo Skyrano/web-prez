@@ -10,10 +10,11 @@ declare let L;
 })
 export class MapComponent implements OnInit {
 
-
+  bureaux: Array<any>;
   bureauxSubscription: Subscription;
 
-  bureaux: Array<any>;
+  polygones: Array<any>;
+  polygonesSubscription: Subscription;
 
   mymap: any;
 
@@ -24,7 +25,22 @@ export class MapComponent implements OnInit {
       this.bureauxSubscription = this.dataRefinerService.bureauxSubject.subscribe(
         (refinedData: any) => {
           this.bureaux = refinedData;
-          this.mapInit();
+          if (this.polygones != null) {
+            this.mapInit();
+            console.log("polygones est pas nul");
+            console.log(this.polygones);
+
+          }
+        }
+      );
+      this.polygonesSubscription = this.dataRefinerService.polygonesSubject.subscribe(
+        (refinedData: any) => {
+          this.polygones = refinedData;
+          if (this.bureaux != null) {
+            this.mapInit();
+            console.log("polygones est pas nul");
+            console.log(this.bureaux);
+          }
         }
       );
       }
@@ -34,21 +50,38 @@ export class MapComponent implements OnInit {
 
     this.mymap = L.map('map').setView([48.111707, -1.675811], 13);
 
+    console.log("On init la map");
+
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
         attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
     }).addTo(this.mymap);
 
-
-
     for (let i = 0; i < this.bureaux.length; i++) {
-      console.log(this.bureaux[i]);
       L.circle(this.bureaux[i], {
-        color: 'red',
-        fillColor: '#f03',
-        fillOpacity: 0.01,
+        color: 'blue',
+        weight: 1,
+        fillOpacity: 0.5,
         radius: 50
       }).addTo(this.mymap);
     }
+
+    for (let i = 0; i < this.polygones.length; i++) {
+      if (this.polygones[i][0].length < 3) {
+        L.polygon(this.polygones[i], {
+          color: 'red',
+          weight: 1,
+          fillOpacity: 0}).addTo(this.mymap);
+      }
+      else {
+        for (let j = 0; j < this.polygones[i][0].length.length; j++) {
+          L.polygon(this.polygones[i][j], {
+            color: 'red',
+            weight: 1,
+            fillOpacity: 0}).addTo(this.mymap);
+        }
+      }
+    }
+
   }
 
 }
