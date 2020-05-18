@@ -7,6 +7,7 @@ import { Injectable } from '@angular/core';
 export class DataRefinerService {
 
   rawDataSubscription: Subscription;
+  mapInitialized : boolean = false;
 
   fullData: any;
   fullDataSubject = new Subject<any>();
@@ -18,12 +19,17 @@ export class DataRefinerService {
   polygonesSubject = new Subject<Array<any>>();
 
 
-
   constructor(private httpClientService: HttpClientService) {
     this.rawDataSubscription = this.httpClientService.rawDataSubject.subscribe(
       (serverdata: any) => {
-        this.refineData(serverdata);
-        this.emitAllData();
+        this.fullData = serverdata;
+        if (this.mapInitialized) {
+          this.emitSpecificData();
+        }
+        else {
+          this.refineMap(serverdata);
+          this.emitAllData();
+        }
       }
     );
     this.httpClientService.loadDataFromServer();
@@ -35,24 +41,21 @@ export class DataRefinerService {
     this.polygonesSubject.next(this.polygones);
   }
 
+  emitSpecificData() {
+    this.fullDataSubject.next(this.fullData);
+  }
+
   fetchAllData() {
     this.httpClientService.createLink(null, null, null,  null, null);
     this.httpClientService.loadDataFromServer();
-    this.emitAllData();
   }
 
   fetchSpecificData(codeElection: string, numeroTour: string, niveauDetail: string,  nomLieu: string, candidats: Array<string>) {
     this.httpClientService.createLink(codeElection, numeroTour, niveauDetail,  nomLieu, candidats);
     this.httpClientService.loadDataFromServer();
-    this.emitAllData();
   }
 
-  refineData(rawdata: any) {
-    this.fullData = rawdata;
-
-    console.log(rawdata);
-
-
+  refineMap(rawdata: any) {
     this.bureaux = new Array();
     var xpos = new Array();
     for (let i = 0; i < rawdata.nhits ; i++) {
@@ -61,7 +64,6 @@ export class DataRefinerService {
         xpos.push(rawdata.records[i].fields.geo_point[0]);
       }
     }
-
 
     this.polygones = new Array();
     xpos = new Array();
@@ -76,11 +78,11 @@ export class DataRefinerService {
         xpos.push(this.polygones[this.polygones.length-1][0][0])
       }
     }
+    this.mapInitialized = true;
+  }
 
-    console.log(this.polygones.length);
 
-
-
+  refineCandidats (data: any) {
 
   }
 

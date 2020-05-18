@@ -27,9 +27,6 @@ export class MapComponent implements OnInit {
           this.bureaux = refinedData;
           if (this.polygones != null) {
             this.mapInit();
-            console.log("polygones est pas nul");
-            console.log(this.polygones);
-
           }
         }
       );
@@ -38,8 +35,6 @@ export class MapComponent implements OnInit {
           this.polygones = refinedData;
           if (this.bureaux != null) {
             this.mapInit();
-            console.log("polygones est pas nul");
-            console.log(this.bureaux);
           }
         }
       );
@@ -49,8 +44,6 @@ export class MapComponent implements OnInit {
   mapInit() {
 
     this.mymap = L.map('map').setView([48.111707, -1.675811], 13);
-
-    console.log("On init la map");
 
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
         attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'

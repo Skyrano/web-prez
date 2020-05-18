@@ -137,11 +137,19 @@ export class MainComponent implements OnInit {
 
   ngOnInit(): void {
     this.dataSubscription = this.dataRefinerService.fullDataSubject.subscribe(
-      (refinedData: any) => {
-        this.data = refinedData;
+      (serverdata: any) => {
+        this.data = serverdata;
       }
     );
   }
+
+
+  onFetch() {
+    this.dataRefinerService.fetchSpecificData("P17","2","bu",null,["MACRON+Emmanuel",null,null,null,null,null,null,null,null,null]);
+  }
+
+
+
 
 
 }
