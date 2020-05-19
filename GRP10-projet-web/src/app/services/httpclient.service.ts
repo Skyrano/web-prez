@@ -20,7 +20,6 @@ export class HttpClientService {
 
   loadDataFromServer() {
     console.log(this.datalink);
-
     this.httpClient.get(this.datalink).subscribe(
       (response) => {
         this.rawData = response;

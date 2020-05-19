@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { DataRefinerService } from '../services/dataRefiner.service';
 
 @Component({
   selector: 'app-menu',
@@ -7,9 +8,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MenuComponent implements OnInit {
 
-  constructor() { }
+  constructor(private dataRefinerService: DataRefinerService) { }
 
   ngOnInit(): void {
+  }
+
+  onRefresh() {
+    this.dataRefinerService.reinitMap();
   }
 
 }

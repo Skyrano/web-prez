@@ -16,35 +16,46 @@ export class MapComponent implements OnInit {
   zones: Array<any>;
   zonesSubscription: Subscription;
 
-  mymap: any;
+  mymap: any = null;
 
   constructor(private dataRefinerService: DataRefinerService) { }
 
-
   ngOnInit() {
-      this.bureauxSubscription = this.dataRefinerService.bureauxSubject.subscribe(
-        (refinedData: any) => {
-          this.bureaux = refinedData;
-          if (this.zones != null) {
-            this.mapInit();
-          }
+    this.bureauxSubscription = this.dataRefinerService.bureauxSubject.subscribe(
+      (refinedData: any) => {
+        this.bureaux = refinedData;
+        if (this.zones != null && !this.dataRefinerService.getMapInitialized()) {
+          this.init();
         }
-      );
-      this.zonesSubscription = this.dataRefinerService.zonesSubject.subscribe(
-        (refinedData: any) => {
-          this.zones = refinedData;
-          if (this.bureaux != null) {
-            this.mapInit();
-          }
-        }
-      );
       }
+    );
+    this.zonesSubscription = this.dataRefinerService.zonesSubject.subscribe(
+      (refinedData: any) => {
+        this.zones = refinedData;
+        if (this.bureaux != null && !this.dataRefinerService.getMapInitialized()) {
+          this.init();
+        }
+      }
+    );
+  }
+
+
+  init() {
+    if (this.bureaux != null && this.zones!= null) {
+      this.mapInit();
+      this.dataRefinerService.setMapInitialized();
+      this.dataRefinerService.changeSpecificData("P17","1","vi",null,null);
+      this.dataRefinerService.fetchSpecificData();
+    }
+  }
 
 
   mapInit() {
-
+    if (this.mymap != null) {
+      this.mymap.off();
+      this.mymap.remove();
+    }
     this.mymap = L.map('map').setView([48.111707, -1.675811], 13);
-
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
         attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
     }).addTo(this.mymap);
@@ -74,8 +85,6 @@ export class MapComponent implements OnInit {
         }
       }
     }
-    this.dataRefinerService.changeSpecificData("P17","1","vi",null,null);
-    this.dataRefinerService.fetchSpecificData();
   }
 
 }

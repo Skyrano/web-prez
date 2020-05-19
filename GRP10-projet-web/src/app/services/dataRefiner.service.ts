@@ -37,7 +37,7 @@ export class DataRefinerService {
     this.rawDataSubscription = this.httpClientService.rawDataSubject.subscribe(
       (serverdata: any) => {
         this.fullData = serverdata;
-        if (this.mapInitialized) {
+        if (this.getMapInitialized()) {
           this.refineParticipation(serverdata);
           this.refineCandidats(serverdata);
           this.calculPourcentageCandidats();
@@ -49,7 +49,23 @@ export class DataRefinerService {
         }
       }
     );
-    this.httpClientService.loadDataFromServer();
+    this.reinitMap();
+  }
+
+  reinitMap() {
+    this.changeSpecificData(null,null,null,null,null);
+    this.mapInitialized = false;
+    this.zonesSubject.next(null);
+    this.bureauxSubject.next(null);
+    this.fetchAllData();
+  }
+
+  getMapInitialized() {
+    return this.mapInitialized;
+  }
+
+  setMapInitialized() {
+    this.mapInitialized = true;
   }
 
   emitAllData() {
@@ -126,16 +142,6 @@ export class DataRefinerService {
         xpos.push(this.zones[this.zones.length-1][0][0])
       }
     }
-    this.mapInitialized = true;
-
-    var noms = new Array<any>();
-
-    for (let i = 0; i < rawdata.nhits ; i++) {
-      if (noms.indexOf(rawdata.records[i].fields.geo_point)==-1) {
-        noms.push(rawdata.records[i].fields.geo_point);
-      }
-    }
-
   }
 
 
