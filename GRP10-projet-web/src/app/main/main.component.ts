@@ -9,6 +9,7 @@ import { DataRefinerService } from '../services/dataRefiner.service';
 })
 export class MainComponent implements OnInit {
 
+
   candidats_zone = [
     {
       name: 'Phillipe POUTOU',
@@ -117,37 +118,58 @@ export class MainComponent implements OnInit {
   //event changement de bureau dans select-bureau
   changeBureau(newBureau: string) {
     this.bureau_selected = newBureau;
+    console.log(this.bureau_selected);
+
   }
 
-  annee_selected = 2017;
-  tour_selected = 1;
+  annee_selected = "P17";
+  tour_selected = "1";
 
   changeAnneeTour(newAnneeTour){
     this.annee_selected = newAnneeTour[0];
     this.tour_selected = newAnneeTour[1];
 
-    console.log("nouvelle année / tour : " + this.annee_selected + " " + this.tour_selected);
+    this.dataRefinerService.setCodeElection(this.annee_selected);
+    this.dataRefinerService.setNumeroTour(this.tour_selected);
+    this.dataRefinerService.fetchSpecificData();
   }
 
   dataSubscription: Subscription;
-
   data: any;
+
+  candidatsSubscription: Subscription;
+  candidats: any;
+
+  participationSubscription: Subscription;
+  participation: any;
+
+
 
   constructor(private dataRefinerService: DataRefinerService) { }
 
   ngOnInit(): void {
     this.dataSubscription = this.dataRefinerService.fullDataSubject.subscribe(
-      (serverdata: any) => {
-        this.data = serverdata;
+      (data: any) => {
+        this.data = data;
+      }
+    );
+
+    this.candidatsSubscription = this.dataRefinerService.listeCandidatsSubject.subscribe(
+      (data: any) => {
+        this.candidats_zone = data;
+      }
+    );
+
+    this.participationSubscription = this.dataRefinerService.participationSubject.subscribe(
+      (data: any) => {
+        this.participation_zone = data;
       }
     );
   }
 
 
   onFetch() {
-    this.dataRefinerService.changeSpecificData("P17","2","vi",null,["MACRON+Emmanuel",null,null,null,null,null,null,null,null,null]);
-    this.dataRefinerService.setNumeroTour("1");
-    this.dataRefinerService.setCandidats(null);
+    this.dataRefinerService.changeSpecificData("P17","1","vi",null,null);
     this.dataRefinerService.fetchSpecificData();
   }
 

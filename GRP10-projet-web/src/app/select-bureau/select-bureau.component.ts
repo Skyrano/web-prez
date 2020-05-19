@@ -18,7 +18,6 @@ export class SelectBureauComponent implements OnInit {
   }
 
   onChange(){
-    console.log(this.bureau_value);
     this.newBureauEvent.emit(this.bureau_value);
   }
 

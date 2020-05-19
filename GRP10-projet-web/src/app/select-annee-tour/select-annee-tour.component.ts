@@ -7,8 +7,8 @@ import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 })
 export class SelectAnneeTourComponent implements OnInit {
 
-  annee_value = 2017;
-  tour_value = 1;
+  annee_value = "P17";
+  tour_value = "1";
 
   @Output() newAnneeTourEvent = new EventEmitter();
 
@@ -18,7 +18,6 @@ export class SelectAnneeTourComponent implements OnInit {
   }
 
   onChange(){
-    console.log(this.annee_value + " " + this.tour_value);
     this.newAnneeTourEvent.emit([this.annee_value, this.tour_value]);
   }
 

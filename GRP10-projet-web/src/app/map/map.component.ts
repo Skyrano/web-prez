@@ -74,13 +74,8 @@ export class MapComponent implements OnInit {
         }
       }
     }
-
-    this.dataRefinerService.changeSpecificData("P17","2","vi",null,["MACRON+Emmanuel",null,null,null,null,null,null,null,null,null]);
-    this.dataRefinerService.setNumeroTour("1");
-    this.dataRefinerService.setCandidats(null);
+    this.dataRefinerService.changeSpecificData("P17","1","vi",null,null);
     this.dataRefinerService.fetchSpecificData();
-
-
   }
 
 }
