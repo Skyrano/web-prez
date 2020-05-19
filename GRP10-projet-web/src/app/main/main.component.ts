@@ -145,7 +145,10 @@ export class MainComponent implements OnInit {
 
 
   onFetch() {
-    this.dataRefinerService.fetchSpecificData("P17","2","bu",null,["MACRON+Emmanuel",null,null,null,null,null,null,null,null,null]);
+    this.dataRefinerService.changeSpecificData("P17","2","vi",null,["MACRON+Emmanuel",null,null,null,null,null,null,null,null,null]);
+    this.dataRefinerService.setNumeroTour("1");
+    this.dataRefinerService.setCandidats(null);
+    this.dataRefinerService.fetchSpecificData();
   }
 
 

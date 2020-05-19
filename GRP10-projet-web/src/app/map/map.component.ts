@@ -13,8 +13,8 @@ export class MapComponent implements OnInit {
   bureaux: Array<any>;
   bureauxSubscription: Subscription;
 
-  polygones: Array<any>;
-  polygonesSubscription: Subscription;
+  zones: Array<any>;
+  zonesSubscription: Subscription;
 
   mymap: any;
 
@@ -25,14 +25,14 @@ export class MapComponent implements OnInit {
       this.bureauxSubscription = this.dataRefinerService.bureauxSubject.subscribe(
         (refinedData: any) => {
           this.bureaux = refinedData;
-          if (this.polygones != null) {
+          if (this.zones != null) {
             this.mapInit();
           }
         }
       );
-      this.polygonesSubscription = this.dataRefinerService.polygonesSubject.subscribe(
+      this.zonesSubscription = this.dataRefinerService.zonesSubject.subscribe(
         (refinedData: any) => {
-          this.polygones = refinedData;
+          this.zones = refinedData;
           if (this.bureaux != null) {
             this.mapInit();
           }
@@ -58,22 +58,28 @@ export class MapComponent implements OnInit {
       }).addTo(this.mymap);
     }
 
-    for (let i = 0; i < this.polygones.length; i++) {
-      if (this.polygones[i][0].length < 3) {
-        L.polygon(this.polygones[i], {
+    for (let i = 0; i < this.zones.length; i++) {
+      if (this.zones[i][0].length < 3) {
+        L.polygon(this.zones[i], {
           color: 'red',
           weight: 1,
           fillOpacity: 0}).addTo(this.mymap);
       }
       else {
-        for (let j = 0; j < this.polygones[i][0].length.length; j++) {
-          L.polygon(this.polygones[i][j], {
+        for (let j = 0; j < this.zones[i][0].length.length; j++) {
+          L.polygon(this.zones[i][j], {
             color: 'red',
             weight: 1,
             fillOpacity: 0}).addTo(this.mymap);
         }
       }
     }
+
+    this.dataRefinerService.changeSpecificData("P17","2","vi",null,["MACRON+Emmanuel",null,null,null,null,null,null,null,null,null]);
+    this.dataRefinerService.setNumeroTour("1");
+    this.dataRefinerService.setCandidats(null);
+    this.dataRefinerService.fetchSpecificData();
+
 
   }
 

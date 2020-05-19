@@ -15,8 +15,22 @@ export class DataRefinerService {
   bureaux: Array<any>;
   bureauxSubject = new Subject<Array<any>>();
 
-  polygones: Array<any>;
-  polygonesSubject = new Subject<Array<any>>();
+  zones: Array<any>;
+  zonesSubject = new Subject<Array<any>>();
+
+  listeCandidats: Array<any>;
+  listeCandidatsSubject = new Subject<Array<any>>();
+
+  participation: any;
+  participationSubject = new Subject<any>();
+
+  codeElection: string;
+  numeroTour: string;
+  niveauDetail: string;
+  nomLieu: string;
+  candidats: Array<string>;
+
+
 
 
   constructor(private httpClientService: HttpClientService) {
@@ -24,6 +38,8 @@ export class DataRefinerService {
       (serverdata: any) => {
         this.fullData = serverdata;
         if (this.mapInitialized) {
+          this.refineCandidats(serverdata);
+          this.refineParticipation(serverdata);
           this.emitSpecificData();
         }
         else {
@@ -38,11 +54,12 @@ export class DataRefinerService {
   emitAllData() {
     this.fullDataSubject.next(this.fullData);
     this.bureauxSubject.next(this.bureaux);
-    this.polygonesSubject.next(this.polygones);
+    this.zonesSubject.next(this.zones);
   }
 
   emitSpecificData() {
     this.fullDataSubject.next(this.fullData);
+    this.listeCandidatsSubject.next(this.listeCandidats);
   }
 
   fetchAllData() {
@@ -50,10 +67,39 @@ export class DataRefinerService {
     this.httpClientService.loadDataFromServer();
   }
 
-  fetchSpecificData(codeElection: string, numeroTour: string, niveauDetail: string,  nomLieu: string, candidats: Array<string>) {
-    this.httpClientService.createLink(codeElection, numeroTour, niveauDetail,  nomLieu, candidats);
+  fetchSpecificData() {
+    this.httpClientService.createLink(this.codeElection, this.numeroTour, this.niveauDetail,  this.nomLieu, this.candidats);
     this.httpClientService.loadDataFromServer();
   }
+
+  changeSpecificData(codeElection: string, numeroTour: string, niveauDetail: string,  nomLieu: string, candidats: Array<string>) {
+    this.codeElection = codeElection;
+    this.numeroTour = numeroTour;
+    this.niveauDetail = niveauDetail;
+    this.nomLieu = nomLieu;
+    this.candidats = candidats;
+  }
+
+  setCodeElection(codeElection: string) {
+    this.codeElection = codeElection;
+  }
+
+  setNumeroTour(numeroTour: string) {
+    this.numeroTour = numeroTour;
+  }
+
+  setNiveauDetail(niveauDetail: string) {
+    this.niveauDetail = niveauDetail;
+  }
+
+  setNomLieu(nomLieu: string) {
+    this.nomLieu = nomLieu;
+  }
+
+  setCandidats(candidats: Array<string>) {
+    this.candidats = candidats;
+  }
+
 
   refineMap(rawdata: any) {
     this.bureaux = new Array();
@@ -65,7 +111,7 @@ export class DataRefinerService {
       }
     }
 
-    this.polygones = new Array();
+    this.zones = new Array();
     xpos = new Array();
 
     for (let i = 0; i < rawdata.nhits ; i++) {
@@ -74,16 +120,110 @@ export class DataRefinerService {
         for (let j = 0; j < rawdata.records[i].fields.geo_shape.coordinates[0].length; j++) {
           coordinates.push(rawdata.records[i].fields.geo_shape.coordinates[0][j].reverse());
         }
-        this.polygones.push(coordinates);
-        xpos.push(this.polygones[this.polygones.length-1][0][0])
+        this.zones.push(coordinates);
+        xpos.push(this.zones[this.zones.length-1][0][0])
       }
     }
     this.mapInitialized = true;
+
+    var noms = new Array<any>();
+
+    for (let i = 0; i < rawdata.nhits ; i++) {
+      if (noms.indexOf(rawdata.records[i].fields.geo_point)==-1) {
+        noms.push(rawdata.records[i].fields.geo_point);
+      }
+    }
+
   }
 
 
   refineCandidats (data: any) {
+    this.listeCandidats = new Array<any>();
+    if (data.records[0].fields.hasOwnProperty('candidat_3')) {
+      this.listeCandidats.push({nom : data.records[0].fields.candidat_1,
+        nombreVotes : 0});
+      this.listeCandidats.push({nom : data.records[0].fields.candidat_2,
+        nombreVotes : 0});
+      this.listeCandidats.push({nom : data.records[0].fields.candidat_3,
+        nombreVotes : 0});
+      this.listeCandidats.push({nom : data.records[0].fields.candidat_4,
+        nombreVotes : 0});
+      this.listeCandidats.push({nom : data.records[0].fields.candidat_5,
+        nombreVotes : 0});
+      this.listeCandidats.push({nom : data.records[0].fields.candidat_6,
+        nombreVotes : 0});
+      this.listeCandidats.push({nom : data.records[0].fields.candidat_7,
+        nombreVotes : 0});
+      this.listeCandidats.push({nom : data.records[0].fields.candidat_8,
+        nombreVotes : 0});
+      this.listeCandidats.push({nom : data.records[0].fields.candidat_9,
+        nombreVotes : 0});
+      this.listeCandidats.push({nom : data.records[0].fields.candidat_10,
+        nombreVotes : 0});
+
+      if (data.records[0].fields.hasOwnProperty('candidat_11')) {
+        this.listeCandidats.push({nom : data.records[0].fields.candidat_11,
+          nombreVotes : 0});
+          for (let i = 0; i < data.nhits; i++) {
+            this.listeCandidats[0].nombreVotes += data.records[i].fields.nb_voix_1;
+            this.listeCandidats[1].nombreVotes += data.records[i].fields.nb_voix_2;
+            this.listeCandidats[2].nombreVotes += data.records[i].fields.nb_voix_3;
+            this.listeCandidats[3].nombreVotes += data.records[i].fields.nb_voix_4;
+            this.listeCandidats[4].nombreVotes += data.records[i].fields.nb_voix_5;
+            this.listeCandidats[5].nombreVotes += data.records[i].fields.nb_voix_6;
+            this.listeCandidats[6].nombreVotes += data.records[i].fields.nb_voix_7;
+            this.listeCandidats[7].nombreVotes += data.records[i].fields.nb_voix_8;
+            this.listeCandidats[8].nombreVotes += data.records[i].fields.nb_voix_9;
+            this.listeCandidats[9].nombreVotes += data.records[i].fields.nb_voix_10;
+            this.listeCandidats[10].nombreVotes += data.records[i].fields.nb_voix_11;
+          }
+      }
+      else {
+        for (let i = 0; i < data.nhits; i++) {
+          this.listeCandidats[0].nombreVotes += data.records[i].fields.nb_voix_1;
+          this.listeCandidats[1].nombreVotes += data.records[i].fields.nb_voix_2;
+          this.listeCandidats[2].nombreVotes += data.records[i].fields.nb_voix_3;
+          this.listeCandidats[3].nombreVotes += data.records[i].fields.nb_voix_4;
+          this.listeCandidats[4].nombreVotes += data.records[i].fields.nb_voix_5;
+          this.listeCandidats[5].nombreVotes += data.records[i].fields.nb_voix_6;
+          this.listeCandidats[6].nombreVotes += data.records[i].fields.nb_voix_7;
+          this.listeCandidats[7].nombreVotes += data.records[i].fields.nb_voix_8;
+          this.listeCandidats[8].nombreVotes += data.records[i].fields.nb_voix_9;
+          this.listeCandidats[9].nombreVotes += data.records[i].fields.nb_voix_10;
+        }
+      }
+    }
+    else {
+      this.listeCandidats.push({nom : data.records[0].fields.candidat_1,
+        nombreVotes : 0});
+      this.listeCandidats.push({nom : data.records[0].fields.candidat_2,
+        nombreVotes : 0});
+
+      for (let i = 0; i < data.nhits; i++) {
+        this.listeCandidats[0].nombreVotes += data.records[i].fields.nb_voix_1;
+        this.listeCandidats[1].nombreVotes += data.records[i].fields.nb_voix_2;
+      }
+    }
+  }
+
+
+  refineParticipation (data: any) {
+    this.participation = {
+      inscrits: 0,
+      blancs: 0,
+      exprimes: 0,
+      abstention: 0
+    };
+
+    for (let i = 0; i < data.nhits; i++) {
+      this.participation.inscrits += data.records[i].fields.nb_inscrits;
+      this.participation.blancs += data.records[i].fields.nb_nuls;
+      this.participation.exprimes += data.records[i].fields.nb_exprimes;
+      this.participation.abstention += data.records[i].fields.nb_inscrits - data.records[i].fields.nb_bulletins;
+    }
 
   }
+
+
 
 }
