@@ -1,6 +1,7 @@
 import { Subscription, Subject } from 'rxjs';
 import { HttpClientService } from './httpclient.service';
 import { Injectable } from '@angular/core';
+import { SelectAnneeTourComponent } from '../select-annee-tour/select-annee-tour.component';
 
 @Injectable()
 
@@ -23,6 +24,8 @@ export class DataRefinerService {
 
   participation: any;
   participationSubject = new Subject<any>();
+
+  refeshSelectTourAnneeSubject = new Subject<any>();
 
   codeElection: string;
   numeroTour: string;
@@ -56,6 +59,7 @@ export class DataRefinerService {
     this.changeSpecificData(null,null,null,null,null);
     this.mapInitialized = false;
     this.zonesSubject.next(this.zones);
+    this.refeshSelectTourAnneeSubject.next();
   }
 
   getMapInitialized() {

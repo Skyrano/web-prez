@@ -1,4 +1,4 @@
-<app-select-annee-tour (newAnneeTourEvent)="changeAnneeTour($event)"></app-select-annee-tour>
+<app-select-annee-tour *ngFor="let r of resetAnneeTour" (newAnneeTourEvent)="changeAnneeTour($event)"></app-select-annee-tour>
 
 <div id="infos_principales">
     <app-map></app-map>

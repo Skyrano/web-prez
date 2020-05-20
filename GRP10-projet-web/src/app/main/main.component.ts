@@ -118,12 +118,16 @@ export class MainComponent implements OnInit {
   //event changement de bureau dans select-bureau
   changeBureau(newBureau: string) {
     this.bureau_selected = newBureau;
-    console.log(this.bureau_selected);
-
   }
 
   annee_selected = "P17";
   tour_selected = "1";
+  resetAnneeTour: any[] = [{}];
+
+   recreateSelectAnneeTour() {
+    this.resetAnneeTour[0] = {};
+  }
+
 
   changeAnneeTour(newAnneeTour){
     this.annee_selected = newAnneeTour[0];
@@ -143,6 +147,7 @@ export class MainComponent implements OnInit {
   participationSubscription: Subscription;
   participation: any;
 
+  refeshSelectTourAnneeSubscription: Subscription;
 
 
   constructor(private dataRefinerService: DataRefinerService) { }
@@ -163,6 +168,12 @@ export class MainComponent implements OnInit {
     this.participationSubscription = this.dataRefinerService.participationSubject.subscribe(
       (data: any) => {
         this.participation_zone = data;
+      }
+    );
+
+    this.refeshSelectTourAnneeSubscription = this.dataRefinerService.refeshSelectTourAnneeSubject.subscribe(
+      () => {
+        this.recreateSelectAnneeTour();
       }
     );
   }
