@@ -24,7 +24,7 @@ export class MapComponent implements OnInit {
     this.bureauxSubscription = this.dataRefinerService.bureauxSubject.subscribe(
       (refinedData: any) => {
         this.bureaux = refinedData;
-        if (this.zones != null && !this.dataRefinerService.getMapInitialized()) {
+        if (!this.dataRefinerService.getMapInitialized()) {
           this.init();
         }
       }
@@ -32,7 +32,7 @@ export class MapComponent implements OnInit {
     this.zonesSubscription = this.dataRefinerService.zonesSubject.subscribe(
       (refinedData: any) => {
         this.zones = refinedData;
-        if (this.bureaux != null && !this.dataRefinerService.getMapInitialized()) {
+        if (!this.dataRefinerService.getMapInitialized()) {
           this.init();
         }
       }

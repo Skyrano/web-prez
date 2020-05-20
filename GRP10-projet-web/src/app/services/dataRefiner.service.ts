@@ -49,15 +49,13 @@ export class DataRefinerService {
         }
       }
     );
-    this.reinitMap();
+    this.fetchAllData();
   }
 
   reinitMap() {
     this.changeSpecificData(null,null,null,null,null);
     this.mapInitialized = false;
-    this.zonesSubject.next(null);
-    this.bureauxSubject.next(null);
-    this.fetchAllData();
+    this.zonesSubject.next(this.zones);
   }
 
   getMapInitialized() {
