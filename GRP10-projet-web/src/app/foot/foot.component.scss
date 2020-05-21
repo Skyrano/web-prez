@@ -9,7 +9,9 @@ footer {
 	display: flex;
 	flex-direction: row;
 	justify-content: space-evenly;
-	flex-wrap: wrap;
+    flex-wrap: wrap;
+    
+    column-gap: 40px;
 }
 
 #links > div > a {
@@ -24,6 +26,7 @@ footer {
 
 #links > div > a > h3 {
     margin: 0px;
+    text-align: center;
 }
 
 footer > p {
