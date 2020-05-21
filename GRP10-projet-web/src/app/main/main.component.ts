@@ -9,10 +9,10 @@ import { DataRefinerService } from '../services/dataRefiner.service';
 })
 export class MainComponent implements OnInit {
 
+  candidats_bureau = [
+  ];
 
-  candidats_zone = [];
-
-  participation_zone = {
+  participation_bureau = {
     pourcentage: 0,
     inscrits: 0,
     blancs: 0,
@@ -20,53 +20,7 @@ export class MainComponent implements OnInit {
     exprimes: 0
   };
 
-  candidats_bureau = [
-    {
-      name: 'Phillipe POUTOU',
-      voix: '900',
-      pourcentage: '56'
-    },
-    {
-      name: 'Albert DUPRES',
-      voix: '325',
-      pourcentage: '25'
-    },
-    {
-      name: 'Jacques CHEMINADE',
-      voix: '200',
-      pourcentage: '29'
-    },
-    {
-      name: 'Phillipe POUTOU',
-      voix: '900',
-      pourcentage: '56'
-    },
-    {
-      name: 'Albert DUPRES',
-      voix: '325',
-      pourcentage: '25'
-    },
-    {
-      name: 'Jacques CHEMINADE',
-      voix: '200',
-      pourcentage: '29'
-    },
-    {
-      name: 'Phillipe POUTOU',
-      voix: '900',
-      pourcentage: '56'
-    }
-  ];
-
-  participation_bureau = {
-    pourcentage: 90,
-    inscrits: 6000,
-    blancs: 15,
-    nuls: 60,
-    exprimes: 5000
-  };
-
-  bureaux = ["bureau 500", "bureau 501", "bureau 502"]; //input to select-bureau
+  bureaux = []; //input to select-bureau
   bureau_selected = ''; //output from select-bureau
   resetBureaux: any[] = [{}];
 
@@ -78,8 +32,6 @@ export class MainComponent implements OnInit {
   }
 
   recreateBureaux() {
-    console.log("recreating");
-
     this.resetBureaux[0] = {};
   }
 
@@ -127,13 +79,13 @@ export class MainComponent implements OnInit {
 
     this.candidatsSubscription = this.dataRefinerService.listeCandidatsSubject.subscribe(
       (data: any) => {
-        this.candidats_zone = data;
+        this.candidats_bureau = data;
       }
     );
 
     this.participationSubscription = this.dataRefinerService.participationSubject.subscribe(
       (data: any) => {
-        this.participation_zone = data;
+        this.participation_bureau = data;
       }
     );
 

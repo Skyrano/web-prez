@@ -16,8 +16,11 @@ export class MapComponent implements OnInit {
   zones: Array<any>;
   zonesSubscription: Subscription;
 
+  resizeSubscription: Subscription;
+
   mymap: any = null;
-  markerGroup: any;
+  selectedCircle: any;
+  listCircles: Array<any>;
 
   constructor(private dataRefinerService: DataRefinerService) { }
 
@@ -28,14 +31,16 @@ export class MapComponent implements OnInit {
         if (!this.dataRefinerService.getMapInitialized()) {
           this.init();
         }
-        this.mapRefresh();
+        else {
+          this.mapRefresh();
+        }
       }
     );
   }
 
 
   init() {
-    this.mapInit();
+    setTimeout(() => {this.mapInit()}, 1000);
     this.dataRefinerService.setMapInitialized();
     this.dataRefinerService.changeSpecificData("P17","1","vi",null,null);
     this.dataRefinerService.fetchSpecificData();
@@ -43,39 +48,50 @@ export class MapComponent implements OnInit {
 
 
   mapInit() {
-    if (this.mymap != null) {
-      this.mymap.off();
-      this.mymap.remove();
-    }
+
+    this.mapRemove();
     this.mymap = L.map('map').setView([48.111707, -1.675811], 13);
+
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
         attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
     }).addTo(this.mymap);
-    this.markerGroup = L.layerGroup().addTo(this.mymap);
 
+    this.listCircles = new Array();
+
+    for (let i = 0; i < this.bureaux.length; i++) {
+      this.listCircles.push(L.circle(this.bureaux[i].point, {
+        color: 'blue',
+        weight: 1,
+        fillOpacity: 0.5,
+        radius: 50
+      }));
+      this.listCircles[i].addTo(this.mymap);
+    }
   }
 
   mapRefresh() {
-
-    this.mapInit();
-
+    if (this.selectedCircle != null) {
+      this.mymap.removeLayer(this.selectedCircle);
+      this.selectedCircle = null;
+    }
     for (let i = 0; i < this.bureaux.length; i++) {
       if (this.bureaux[i].selected) {
-        L.circle(this.bureaux[i].point, {
+        this.selectedCircle = L.circle(this.bureaux[i].point, {
           color: 'red',
           weight: 1,
-          fillOpacity: 0.8,
-          radius: 70
-        }).addTo(this.mymap);
+          fillOpacity: 1,
+          radius: 80
+        });
+        this.selectedCircle.addTo(this.mymap);
       }
-      else {
-        L.circle(this.bureaux[i].point, {
-          color: 'blue',
-          weight: 1,
-          fillOpacity: 0.5,
-          radius: 50
-        }).addTo(this.mymap);
-      }
+    }
+  }
+
+  mapRemove() {
+    if (this.mymap) {
+      this.mymap.off();
+      this.mymap.remove();
+      this.mymap = null;
     }
   }
 

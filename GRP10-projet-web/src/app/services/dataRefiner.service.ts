@@ -1,6 +1,7 @@
 import { Subscription, Subject } from 'rxjs';
 import { HttpClientService } from './httpclient.service';
 import { Injectable } from '@angular/core';
+import { ErrorManager } from './error.service';
 
 @Injectable()
 
@@ -8,6 +9,7 @@ export class DataRefinerService {
 
   rawDataSubscription: Subscription;
   mapInitialized : boolean = false;
+
 
   bureaux: Array<any>;
   bureauxSubject = new Subject<Array<any>>();
@@ -33,7 +35,7 @@ export class DataRefinerService {
 
 
 
-  constructor(private httpClientService: HttpClientService) {
+  constructor(private httpClientService: HttpClientService, private errorService: ErrorManager) {
     this.rawDataSubscription = this.httpClientService.rawDataSubject.subscribe(
       (serverdata: any) => {
         if (this.getMapInitialized()) {
@@ -158,31 +160,48 @@ export class DataRefinerService {
 
   refineCandidats (data: any) {
     this.listeCandidats = new Array<any>();
-    if (data.records[0].fields.hasOwnProperty('candidat_3')) {
-      this.listeCandidats.push({name : data.records[0].fields.candidat_1,
-        voix : 0, pourcentage: 0});
-      this.listeCandidats.push({name : data.records[0].fields.candidat_2,
-        voix : 0, pourcentage: 0});
-      this.listeCandidats.push({name : data.records[0].fields.candidat_3,
-        voix : 0, pourcentage: 0});
-      this.listeCandidats.push({name : data.records[0].fields.candidat_4,
-        voix : 0, pourcentage: 0});
-      this.listeCandidats.push({name : data.records[0].fields.candidat_5,
-        voix : 0, pourcentage: 0});
-      this.listeCandidats.push({name : data.records[0].fields.candidat_6,
-        voix : 0, pourcentage: 0});
-      this.listeCandidats.push({name : data.records[0].fields.candidat_7,
-        voix : 0, pourcentage: 0});
-      this.listeCandidats.push({name : data.records[0].fields.candidat_8,
-        voix : 0, pourcentage: 0});
-      this.listeCandidats.push({name : data.records[0].fields.candidat_9,
-        voix : 0, pourcentage: 0});
-      this.listeCandidats.push({name : data.records[0].fields.candidat_10,
-        voix : 0, pourcentage: 0});
 
-      if (data.records[0].fields.hasOwnProperty('candidat_11')) {
-        this.listeCandidats.push({name : data.records[0].fields.candidat_11,
-          voix : 0});
+    if (data.nhits > 0) {
+      if (data.records[0].fields.hasOwnProperty('candidat_3')) {
+        this.listeCandidats.push({name : data.records[0].fields.candidat_1,
+          voix : 0, pourcentage: 0});
+        this.listeCandidats.push({name : data.records[0].fields.candidat_2,
+          voix : 0, pourcentage: 0});
+        this.listeCandidats.push({name : data.records[0].fields.candidat_3,
+          voix : 0, pourcentage: 0});
+        this.listeCandidats.push({name : data.records[0].fields.candidat_4,
+          voix : 0, pourcentage: 0});
+        this.listeCandidats.push({name : data.records[0].fields.candidat_5,
+          voix : 0, pourcentage: 0});
+        this.listeCandidats.push({name : data.records[0].fields.candidat_6,
+          voix : 0, pourcentage: 0});
+        this.listeCandidats.push({name : data.records[0].fields.candidat_7,
+          voix : 0, pourcentage: 0});
+        this.listeCandidats.push({name : data.records[0].fields.candidat_8,
+          voix : 0, pourcentage: 0});
+        this.listeCandidats.push({name : data.records[0].fields.candidat_9,
+          voix : 0, pourcentage: 0});
+        this.listeCandidats.push({name : data.records[0].fields.candidat_10,
+          voix : 0, pourcentage: 0});
+
+        if (data.records[0].fields.hasOwnProperty('candidat_11')) {
+          this.listeCandidats.push({name : data.records[0].fields.candidat_11,
+            voix : 0});
+            for (let i = 0; i < data.nhits; i++) {
+              this.listeCandidats[0].voix += data.records[i].fields.nb_voix_1;
+              this.listeCandidats[1].voix += data.records[i].fields.nb_voix_2;
+              this.listeCandidats[2].voix += data.records[i].fields.nb_voix_3;
+              this.listeCandidats[3].voix += data.records[i].fields.nb_voix_4;
+              this.listeCandidats[4].voix += data.records[i].fields.nb_voix_5;
+              this.listeCandidats[5].voix += data.records[i].fields.nb_voix_6;
+              this.listeCandidats[6].voix += data.records[i].fields.nb_voix_7;
+              this.listeCandidats[7].voix += data.records[i].fields.nb_voix_8;
+              this.listeCandidats[8].voix += data.records[i].fields.nb_voix_9;
+              this.listeCandidats[9].voix += data.records[i].fields.nb_voix_10;
+              this.listeCandidats[10].voix += data.records[i].fields.nb_voix_11;
+            }
+        }
+        else {
           for (let i = 0; i < data.nhits; i++) {
             this.listeCandidats[0].voix += data.records[i].fields.nb_voix_1;
             this.listeCandidats[1].voix += data.records[i].fields.nb_voix_2;
@@ -194,39 +213,30 @@ export class DataRefinerService {
             this.listeCandidats[7].voix += data.records[i].fields.nb_voix_8;
             this.listeCandidats[8].voix += data.records[i].fields.nb_voix_9;
             this.listeCandidats[9].voix += data.records[i].fields.nb_voix_10;
-            this.listeCandidats[10].voix += data.records[i].fields.nb_voix_11;
           }
+        }
       }
       else {
+        this.listeCandidats.push({name : data.records[0].fields.candidat_1,
+          voix : 0});
+        this.listeCandidats.push({name : data.records[0].fields.candidat_2,
+          voix : 0});
+
         for (let i = 0; i < data.nhits; i++) {
           this.listeCandidats[0].voix += data.records[i].fields.nb_voix_1;
           this.listeCandidats[1].voix += data.records[i].fields.nb_voix_2;
-          this.listeCandidats[2].voix += data.records[i].fields.nb_voix_3;
-          this.listeCandidats[3].voix += data.records[i].fields.nb_voix_4;
-          this.listeCandidats[4].voix += data.records[i].fields.nb_voix_5;
-          this.listeCandidats[5].voix += data.records[i].fields.nb_voix_6;
-          this.listeCandidats[6].voix += data.records[i].fields.nb_voix_7;
-          this.listeCandidats[7].voix += data.records[i].fields.nb_voix_8;
-          this.listeCandidats[8].voix += data.records[i].fields.nb_voix_9;
-          this.listeCandidats[9].voix += data.records[i].fields.nb_voix_10;
         }
       }
+      this.errorService.close_error();
     }
     else {
-      this.listeCandidats.push({name : data.records[0].fields.candidat_1,
-        voix : 0});
-      this.listeCandidats.push({name : data.records[0].fields.candidat_2,
-        voix : 0});
-
-      for (let i = 0; i < data.nhits; i++) {
-        this.listeCandidats[0].voix += data.records[i].fields.nb_voix_1;
-        this.listeCandidats[1].voix += data.records[i].fields.nb_voix_2;
-      }
+      this.errorService.print_error("Le bureau sélectionné n'a pas été utilisé pendant ces élections");
     }
   }
 
 
   refineParticipation (data: any) {
+
     this.participation = {
       pourcentage: 0,
       inscrits: 0,
@@ -236,18 +246,19 @@ export class DataRefinerService {
       abstention: 0,
       abstentionPourcentage: 0
     };
-
-    var nb_bulletins = 0;
-    for (let i = 0; i < data.nhits; i++) {
-      this.participation.inscrits += data.records[i].fields.nb_inscrits;
-      this.participation.blancs += data.records[i].fields.nb_blanc;
-      this.participation.nuls += data.records[i].fields.nb_nuls;
-      this.participation.exprimes += data.records[i].fields.nb_exprimes;
-      this.participation.abstention += data.records[i].fields.nb_inscrits - data.records[i].fields.nb_bulletins;
-      nb_bulletins += data.records[i].fields.nb_bulletins;
+    if (data.nhits > 0) {
+      var nb_bulletins = 0;
+      for (let i = 0; i < data.nhits; i++) {
+        this.participation.inscrits += data.records[i].fields.nb_inscrits;
+        this.participation.blancs += data.records[i].fields.nb_blanc;
+        this.participation.nuls += data.records[i].fields.nb_nuls;
+        this.participation.exprimes += data.records[i].fields.nb_exprimes;
+        this.participation.abstention += data.records[i].fields.nb_inscrits - data.records[i].fields.nb_bulletins;
+        nb_bulletins += data.records[i].fields.nb_bulletins;
+      }
+      this.participation.pourcentage = (nb_bulletins / this.participation.inscrits)*100;
+      this.participation.abstentionPourcentage = (this.participation.abstention / this.participation.inscrits)*100;
     }
-    this.participation.pourcentage = (nb_bulletins / this.participation.inscrits)*100;
-    this.participation.abstentionPourcentage = (this.participation.abstention / this.participation.inscrits)*100;
   }
 
   calculPourcentageCandidats() {

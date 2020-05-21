@@ -10,8 +10,8 @@
     <!-- affichage des résultats de Rennes ou du bureau (si sélectionné) -->
     <div id="infos_zone">
         <app-select-bureau *ngFor="let r of resetBureaux" [bureaux]="bureaux" (newBureauEvent)="changeBureau($event)"></app-select-bureau>
-        <app-participation [participation]="participation_zone"></app-participation>
-        <app-candidats [candidats]="candidats_zone"></app-candidats>
+        <app-participation [participation]="participation_bureau"></app-participation>
+        <app-candidats [candidats]="candidats_bureau"></app-candidats>
     </div>
 
     <!-- affichage des résultats du centre -->
@@ -20,10 +20,4 @@
         <app-candidats *ngIf="bureau_selected != ''" [candidats]="candidats_bureau"></app-candidats>
     </div>
 </div>
-
-
-
-
-<p *ngIf="data != null" > {{data.nhits}} </p>
-<button class="btn" (click) = "onFetch()">Fetch</button>
 
