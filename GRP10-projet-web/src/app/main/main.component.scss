@@ -1,25 +1,16 @@
 #infos_principales {
     display: flex;
-    flex-direction: row;
     flex-flow: row wrap;
-
     margin: 20px;
+    column-gap: 20px;
 }
 
 app-map {
-    width: 50%;
+    min-width: 50%;
     min-height: 300px;
     margin-bottom: 20px;
-    
+    flex-grow: 1;
   }
-
-#infos_zone {
-    margin-left: 20px;
-}
-
-#infos_centre {
-    margin-left: 20px;
-}
 
 #infos_zone > h3 {
     color: var(--medium-dark-color);
@@ -29,17 +20,4 @@ app-map {
     #infos_principales {
         flex-direction: column;
     }
-
-    app-map {
-        width: 100%;
-    }
-
-    #infos_zone {
-        margin-left: 0px;
-        width: 100%;
-    }
-    
-    #infos_centre {
-        margin-left: 0px;
-    }
-  }
+}
