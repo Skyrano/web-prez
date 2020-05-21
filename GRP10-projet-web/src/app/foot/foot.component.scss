@@ -1,3 +1,4 @@
+//fond
 footer {
     background-color: var(--medium-light-color);
 }
@@ -5,29 +6,45 @@ footer {
 #links {
     width: 100%;
 
-    /* affichage flex en ligne avec retour ligne */
+    //affichage flex en ligne avec retour ligne
 	display: flex;
 	flex-direction: row;
 	justify-content: space-evenly;
     flex-wrap: wrap;
     
+    //espace minimal entre les colonnes, permet de ne pas avoir de marge en cas de retour à la ligne
     column-gap: 40px;
 }
 
-#links > div > a {
+
+#links > div > h3 {
+    //style des containers de liens
+    margin: 0px;
+    text-align: center;
     padding: 10px;
+    
+    //style du lien revenir en haut
+    color: var(--medium-dark-color);
+    cursor: pointer;
+}
+
+#links > div > h3:hover {
+    color: var(--dark-color);
+}
+
+
+//style des liens
+#links > div > h3 > a {
     color: var(--medium-dark-color);
     text-decoration: none;
 }
 
-#links > div > a:hover {
+
+#links > div > h3 > a:hover {
     color: var(--dark-color);
 }
 
-#links > div > a > h3 {
-    margin: 0px;
-    text-align: center;
-}
+
 
 footer > p {
     color: var(--medium-dark-color);

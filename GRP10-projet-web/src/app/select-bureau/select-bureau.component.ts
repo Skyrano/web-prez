@@ -9,9 +9,11 @@ import { Subscription } from 'rxjs';
 })
 export class SelectBureauComponent implements OnInit {
 
+  //liste des bureaux (centres de vote) à sélectionner
   @Input() bureaux;
   bureau_value = "Tous les centres";
 
+  //évènement output
   @Output() newBureauEvent = new EventEmitter<string>();
 
   bureauxSelectedSubscription: Subscription;
@@ -27,6 +29,7 @@ export class SelectBureauComponent implements OnInit {
     );
   }
 
+  //envoie un évènement au component parent
   onChange(){
     this.newBureauEvent.emit(this.bureau_value);
   }

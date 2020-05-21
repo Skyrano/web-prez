@@ -2,28 +2,34 @@
 
     <h3>Participation :</h3>
 
+    <!-- affichage graphique du pourcentage de participation -->
     <div class="participation_bar">
         <div class="participation_inner_bar" [ngStyle]="{width: getPourcentage()}">
+            <!-- mise sous la forme xx,x % -->
             <p>{{ participation.pourcentage/100 | percent:'1.0-1' }}</p>
         </div>
     </div>
 
     <div class="participation_infos">
+        <!-- nombre d'inscrits -->
         <div class="participation_info" *ngIf="participation.inscrits">
             <p>{{ participation.inscrits }}</p>
             <p>inscrits</p>
         </div>
 
+        <!-- nombre de blancs -->
         <div class="participation_info" *ngIf="participation.blancs">
             <p>{{ participation.blancs }}</p>
             <p>blancs</p>
         </div>
 
+        <!-- nombre de nuls -->
         <div class="participation_info" *ngIf="participation.nuls">
             <p>{{ participation.nuls }}</p>
             <p>nuls</p>
         </div>
 
+        <!-- nombre d'exprimés-->
         <div class="participation_info" *ngIf="participation.exprimes">
             <p>{{ participation.exprimes }}</p>
             <p>exprimés</p>

@@ -1,11 +1,9 @@
-#contact {
-}
 
 .person {
     margin: 20px;
     display: flex;
     flex-direction: row;
-    flex-wrap: wrap-reverse;
+    flex-wrap: wrap-reverse; //affiche l'image au dessus si pas assez de place
 }
 
 .person-texte {

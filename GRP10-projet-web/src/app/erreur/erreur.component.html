@@ -1,4 +1,9 @@
-<div id="error_container" *ngIf="!manager.closed">
-    <p id="error_message"> {{ manager.error_message }}</p>
-    <i class="fa fa-close" (click)="manager.close_error()"></i>
+<!-- affiché si l'erreur est ouverte-->
+<div id="error_container" *ngIf="!errorManager.closed">
+    
+    <!-- message d'erreur -->
+    <p id="error_message"> {{ errorManager.error_message }}</p>
+
+    <!-- croix pour fermer le message d'erreur-->
+    <i class="fa fa-close" (click)="errorManager.close_error()"></i>
 </div>

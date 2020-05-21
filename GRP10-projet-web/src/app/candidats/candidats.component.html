@@ -1,7 +1,9 @@
 <div class="candidats">
 
+    <!-- titre -->
     <h3>Candidats :</h3>
 
+    <!-- on crée un module candidat pour chaque élément du tableau sortedCandidats-->
     <app-candidat *ngFor="let candidat of sortedCandidats"   
                         [candidat]="candidat">
     </app-candidat>

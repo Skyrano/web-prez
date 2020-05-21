@@ -1,18 +1,18 @@
 .candidat {
     margin-top: 10px;
+
+    //affichage en ligne avec retour à la ligne pour le nom et résultats du candidat
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
+
+    justify-content: flex-end; //alignement à droite des résultats en cas de retour à la ligne
+                               //le nom reste à gauche grâce au séparator
 }
 
 .candidat > p {
     margin: 0px;
     color: var(--medium-dark-color);
-}
-
-.candidat > .candidat_pourcentage {
-    flex-grow: 1;
-    text-align: right;
 }
 
 .candidat_bar {
@@ -24,4 +24,5 @@
 .candidat_inner_bar {
     background-color: var(--dark-color);
     height: 100%;
+    //width définie en fonction du résultat du candidat
 }

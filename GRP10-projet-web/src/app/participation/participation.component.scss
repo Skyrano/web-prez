@@ -1,9 +1,6 @@
 .participation {
-    /* for test */
-    /*width : 300px;*/
     border: 1px solid black;
     margin-bottom: 20px;
-
 
     padding: 10px;
 }
@@ -13,14 +10,20 @@
     color: var(--medium-dark-color);
 }
 
+//nombre d'inscrits, de blancs, de nuls, et d'exprimés
 .participation_infos {
     margin-top: 10px;
+
+    //affichage en ligne
     display: flex;
     flex-direction: row;
     justify-content: space-evenly;
 }
 
 .participation_info {
+    //affichage en colonne avec centrage horizontal, ex:
+    //'nombre'
+    //inscrits
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -34,7 +37,7 @@
 .participation_bar {
     border: 1px solid var(--dark-color);
     width: 100%;
-    height: 20px;
+    height: 20px; //hauteur de la barre de participation
 }
 
 .participation_inner_bar {
@@ -42,12 +45,13 @@
     height: 100%;
 }
 
+//texte à l'interieur de la barre de participation
 .participation_inner_bar > p {
     font-size: 100%;
     color: var(--light-color);
     margin: 0px;
     text-align: right;
-    padding-right: 5px;
-    bottom: 4px;
+    padding-right: 5px; //décalage de 5px à gauche par rapport à la fin de la barre
+    bottom: 4px; //centrage vertical
     position: relative;
 }

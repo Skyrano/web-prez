@@ -1,11 +1,13 @@
 <div id="select-annee-tour">
 
+    <!-- liste de sélection de l'année -->
     <select name="select-annee" id="select-annee" class="liste-deroulante" (change)="onChange()" [(ngModel)]="annee_value">
         <option value="P17">Elections Présidentielles 2017</option>
         <option value="P12">Elections Présidentielles 2012</option>
         <option value="P07">Elections Présidentielles 2007</option>
     </select>
 
+    <!-- liste de sélection du tour -->
     <select name="select-tour" id="select-tour" class="liste-deroulante" (change)="onChange()" [(ngModel)]="tour_value">
         <option value="1">Tour 1</option>
         <option value="2">Tour 2</option>

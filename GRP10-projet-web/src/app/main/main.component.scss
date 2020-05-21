@@ -1,22 +1,38 @@
+//carte + liste candidats
 #infos_principales {
+    //affichage en ligne, avec retour à la ligne si trop petit
     display: flex;
     flex-flow: row wrap;
+
+    //marge de 20px autour
     margin: 20px;
+
+    //20px entre les différentes colonnes, permet de ne pas avoir de marge si retour à la ligne
     column-gap: 20px;
 }
 
+//carte
 app-map {
+    //largeur minimale de 50%
     min-width: 50%;
+
+    //hauteur minimale de 300px
     min-height: 300px;
-    margin-bottom: 20px;
+
+    //étirement en largeur
     flex-grow: 1;
+
+    //espace de 20 px en dessous
+    margin-bottom: 20px;
   }
 
 #infos_zone > h3 {
+    //couleur du titre "centre de vote"
     color: var(--medium-dark-color);
 }
 
 @media screen and (max-width: 640px) {
+    //pour les téléphones / tablettes affichage en colonne
     #infos_principales {
         flex-direction: column;
     }

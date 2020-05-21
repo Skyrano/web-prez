@@ -1,10 +1,16 @@
 <div>
     <div class="candidat">
+        <!-- nom du candidat-->
         <p>{{ candidat.name }} : </p>
+
+        <!-- séparation entre le nom et les résultats-->
         <div class="separator"></div>
-        <p class="candidat_pourcentage">{{ candidat.voix }} voix / {{ candidat.pourcentage/100 | percent:'1.0-1' }}</p>
+
+        <!-- résultats du candidat sous la forme : xxxx voix / xx,x % -->
+        <p class="candidat_result">{{ candidat.voix }} voix / {{ candidat.pourcentage/100 | percent:'1.0-1' }}</p>
     </div>
 
+    <!-- affichage graphique du pourcentage -->
     <div class="candidat_bar">
         <div class="candidat_inner_bar" [ngStyle]="{width: getPourcentage()}"></div>
     </div>
