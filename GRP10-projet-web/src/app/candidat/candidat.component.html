@@ -2,7 +2,7 @@
     <div class="candidat">
         <p>{{ candidat.name }} : </p>
         <div class="separator"></div>
-        <p>{{ candidat.voix }} voix / {{ candidat.pourcentage/100 | percent:'1.0-1' }}</p>
+        <p class="candidat_pourcentage">{{ candidat.voix }} voix / {{ candidat.pourcentage/100 | percent:'1.0-1' }}</p>
     </div>
 
     <div class="candidat_bar">

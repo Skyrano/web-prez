@@ -9,7 +9,7 @@
         <app-candidats [candidats]="candidats_zone"></app-candidats>
     </div>
 
-    <div id="infos_centre">
+    <div id="infos_centre" style="display: none;">
         <app-participation *ngIf="bureau_selected != ''" [participation]="participation_bureau"></app-participation>
         <app-candidats *ngIf="bureau_selected != ''" [candidats]="candidats_bureau"></app-candidats>
     </div>

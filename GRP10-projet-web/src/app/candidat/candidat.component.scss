@@ -2,11 +2,17 @@
     margin-top: 10px;
     display: flex;
     flex-direction: row;
+    flex-wrap: wrap;
 }
 
 .candidat > p {
     margin: 0px;
     color: var(--medium-dark-color);
+}
+
+.candidat > .candidat_pourcentage {
+    flex-grow: 1;
+    text-align: right;
 }
 
 .candidat_bar {
