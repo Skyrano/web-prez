@@ -4,27 +4,27 @@
 
     <div class="participation_bar">
         <div class="participation_inner_bar" [ngStyle]="{width: getPourcentage()}">
-            <p>{{ participation.pourcentage }} %</p>
+            <p>{{ participation.pourcentage/100 | percent:'1.0-1' }}</p>
         </div>
     </div>
 
     <div class="participation_infos">
-        <div class="participation_info">
+        <div class="participation_info" *ngIf="participation.inscrits">
             <p>{{ participation.inscrits }}</p>
             <p>inscrits</p>
         </div>
 
-        <div class="participation_info">
+        <div class="participation_info" *ngIf="participation.blancs">
             <p>{{ participation.blancs }}</p>
             <p>blancs</p>
         </div>
 
-        <div class="participation_info">
+        <div class="participation_info" *ngIf="participation.nuls">
             <p>{{ participation.nuls }}</p>
             <p>nuls</p>
         </div>
 
-        <div class="participation_info">
+        <div class="participation_info" *ngIf="participation.exprimes">
             <p>{{ participation.exprimes }}</p>
             <p>exprimés</p>
         </div>
