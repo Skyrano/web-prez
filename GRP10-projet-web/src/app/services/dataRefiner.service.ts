@@ -45,7 +45,6 @@ export class DataRefinerService {
         else {
           this.refineMap(serverdata);
           this.reinitMap();
-          this.bureauxNameListSubject.next(this.bureauxNameList);
         }
       }
     );
@@ -57,6 +56,7 @@ export class DataRefinerService {
     this.mapInitialized = false;
     this.setBureauxSelected("Tous les bureaux")
     this.bureauxSubject.next(this.bureaux);
+    this.bureauxNameListSubject.next(this.bureauxNameList);
     this.refeshSelectTourAnneeSubject.next();
     this.refeshBureauxSubject.next();
   }
@@ -67,11 +67,6 @@ export class DataRefinerService {
 
   setMapInitialized() {
     this.mapInitialized = true;
-  }
-
-  emitInitData() {
-    this.bureauxSubject.next(this.bureaux);
-
   }
 
   emitSpecificData() {
@@ -149,13 +144,8 @@ export class DataRefinerService {
       if (rawdata.records[i].fields.hasOwnProperty('nom_lieu') && rawdata.records[i].fields.hasOwnProperty('geo_point')) {
         let index = this.bureauxNameList.indexOf(rawdata.records[i].fields.nom_lieu);
         if (index == -1) {
-          var polygone = new Array();
-          for (let j = 0; j < rawdata.records[i].fields.geo_shape.coordinates[0].length; j++) {
-            polygone.push(rawdata.records[i].fields.geo_shape.coordinates[0][j].reverse());
-          }
           this.bureaux.push({nom: rawdata.records[i].fields.nom_lieu,
                             point: rawdata.records[i].fields.geo_point,
-                            polygone: polygone,
                             selected: false});
           this.bureauxNameList.push(rawdata.records[i].fields.nom_lieu);
         }
