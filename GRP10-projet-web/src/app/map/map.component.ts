@@ -17,6 +17,7 @@ export class MapComponent implements OnInit {
   zonesSubscription: Subscription;
 
   mymap: any = null;
+  markerGroup: any;
 
   constructor(private dataRefinerService: DataRefinerService) { }
 
@@ -50,22 +51,22 @@ export class MapComponent implements OnInit {
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
         attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
     }).addTo(this.mymap);
+    this.markerGroup = L.layerGroup().addTo(this.mymap);
+
   }
 
   mapRefresh() {
+
+    this.mapInit();
+
     for (let i = 0; i < this.bureaux.length; i++) {
       if (this.bureaux[i].selected) {
         L.circle(this.bureaux[i].point, {
           color: 'red',
           weight: 1,
-          fillOpacity: 0.5,
-          radius: 50
+          fillOpacity: 0.8,
+          radius: 70
         }).addTo(this.mymap);
-
-        L.polygon(this.bureaux[i].polygone, {
-          color: 'red',
-          weight: 1,
-          fillOpacity: 0}).addTo(this.mymap);
       }
       else {
         L.circle(this.bureaux[i].point, {
@@ -77,4 +78,5 @@ export class MapComponent implements OnInit {
       }
     }
   }
-  }
+
+}
