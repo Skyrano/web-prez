@@ -1,4 +1,5 @@
 <h3 id="centre_name">Centre de vote : </h3>
 <select name="select-bureau" id="select-bureau" class="liste-deroulante" (change)="onChange()" [(ngModel)]="bureau_value">
+    <!-- ajoute une option de sélection pour chaque bureau (centre de vote)-->
     <option *ngFor="let bureau of bureaux" [value]="bureau">{{ bureau }}</option>
 </select>

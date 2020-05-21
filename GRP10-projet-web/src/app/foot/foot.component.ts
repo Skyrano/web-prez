@@ -13,6 +13,7 @@ export class FootComponent implements OnInit {
   }
 
   goToTop() {
+    //retourne en haut de la page
     window.scrollTo(0,0);
   }
 

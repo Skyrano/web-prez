@@ -7,9 +7,11 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 })
 export class SelectBureauComponent implements OnInit {
 
+  //liste des bureaux (centres de vote) à sélectionner
   @Input() bureaux;
   bureau_value = "Tous les centres";
 
+  //évènement output
   @Output() newBureauEvent = new EventEmitter<string>();
 
   constructor() { }
@@ -17,6 +19,7 @@ export class SelectBureauComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  //envoie un évènement au component parent
   onChange(){
     this.newBureauEvent.emit(this.bureau_value);
   }

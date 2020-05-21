@@ -10,6 +10,7 @@ export class SelectAnneeTourComponent implements OnInit {
   annee_value: String = "P17";
   tour_value: String = "1";
 
+  //évènement output
   @Output() newAnneeTourEvent = new EventEmitter();
 
   constructor() { }
@@ -17,6 +18,7 @@ export class SelectAnneeTourComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  //déclenche un évènement dans le component parent
   onChange(){
     this.newAnneeTourEvent.emit([this.annee_value, this.tour_value]);
   }

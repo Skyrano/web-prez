@@ -7,14 +7,14 @@
     <!-- carte -->
     <app-map></app-map>
 
-    <!-- affichage des résultats de Rennes ou du bureau (si sélectionné) -->
+    <!-- affichage des résultats de Rennes ou du centre (si sélectionné) -->
     <div id="infos_zone">
         <app-select-bureau *ngFor="let r of resetBureaux" [bureaux]="bureaux" (newBureauEvent)="changeBureau($event)"></app-select-bureau>
         <app-participation [participation]="participation_zone"></app-participation>
         <app-candidats [candidats]="candidats_zone"></app-candidats>
     </div>
 
-    <!-- affichage des résultats du centre -->
+    <!-- affichage des résultats du bureau (pas implémenté) -->
     <div id="infos_centre" style="display: none;">
         <app-participation *ngIf="bureau_selected != ''" [participation]="participation_bureau"></app-participation>
         <app-candidats *ngIf="bureau_selected != ''" [candidats]="candidats_bureau"></app-candidats>
@@ -23,7 +23,7 @@
 
 
 
-
+<!-- debug -->
 <p *ngIf="data != null" > {{data.nhits}} </p>
 <button class="btn" (click) = "onFetch()">Fetch</button>
 

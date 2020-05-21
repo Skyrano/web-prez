@@ -7,6 +7,7 @@ import { Component, Input, OnInit } from '@angular/core';
 })
 export class CandidatComponent implements OnInit {
 
+  //données concernant le candidat
   @Input() candidat;
 
   constructor() { }
@@ -14,6 +15,7 @@ export class CandidatComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  //renvoie le résultat du candidat sous une forme aaptée pour une mise en style
   getPourcentage(){
     return this.candidat.pourcentage + "%";
   }

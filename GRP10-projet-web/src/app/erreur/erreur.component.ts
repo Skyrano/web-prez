@@ -8,12 +8,9 @@ import { ErrorManager } from '../services/error.service';
 })
 export class ErreurComponent implements OnInit {
 
-  manager:ErrorManager;
+  //récupération du gestionnaire d'erreur à la construction
+  constructor(public errorManager: ErrorManager) { }
 
-  constructor(private errorManager: ErrorManager) { }
-
-  ngOnInit(): void {
-    this.manager = this.errorManager;
-  }
+  ngOnInit(): void { }
 
 }

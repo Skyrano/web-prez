@@ -7,6 +7,7 @@ import { Component, Input, OnInit } from '@angular/core';
 })
 export class ParticipationComponent implements OnInit {
 
+  //données concernant la participation
   @Input() participation;
 
   constructor() { }
@@ -14,6 +15,7 @@ export class ParticipationComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  //renvoie le pourcentage sous une forme adaptée pour la mise en style
   getPourcentage(){
     return this.participation.pourcentage + "%";
   }
