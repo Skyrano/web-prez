@@ -13,12 +13,6 @@ export class AppComponent implements OnInit {
 
   constructor(private errorManager: ErrorManager) {}
 
-   ngOnInit() {
-    setTimeout(
-      () => {
-        this.errorManager.print_error("je ne suis pas une erreur");
-      }, 4000
-    );
-   }
+   ngOnInit() {}
 }
 
