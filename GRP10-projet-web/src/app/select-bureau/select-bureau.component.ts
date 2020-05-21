@@ -8,7 +8,7 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 export class SelectBureauComponent implements OnInit {
 
   @Input() bureaux;
-  bureau_value = "Tous les bureaux";
+  bureau_value = "Tous les centres";
 
   @Output() newBureauEvent = new EventEmitter<string>();
 

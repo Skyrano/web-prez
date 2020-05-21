@@ -54,7 +54,7 @@ export class DataRefinerService {
   reinitMap() {
     this.changeSpecificData(null,null,null,null,null);
     this.mapInitialized = false;
-    this.setBureauxSelected("Tous les bureaux")
+    this.setBureauxSelected("Tous les centres")
     this.bureauxSubject.next(this.bureaux);
     this.bureauxNameListSubject.next(this.bureauxNameList);
     this.refeshSelectTourAnneeSubject.next();
@@ -113,7 +113,7 @@ export class DataRefinerService {
   }
 
   setBureauxSelected(bureau: string) {
-    if (bureau == "Tous les bureaux") {
+    if (bureau == "Tous les centres") {
       this.nomLieu = null;
       this.niveauDetail = "vi";
       for (let i = 0; i < this.bureaux.length; i++) {
@@ -152,7 +152,7 @@ export class DataRefinerService {
       }
     }
 
-    this.bureauxNameList.splice(0,0,"Tous les bureaux")
+    this.bureauxNameList.splice(0,0,"Tous les centres")
   }
 
 
