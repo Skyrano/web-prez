@@ -4,13 +4,12 @@
     <app-map></app-map>
 
     <div id="infos_zone">
-        <h3>Nom de la zone</h3>
+        <app-select-bureau *ngFor="let r of resetBureaux" [bureaux]="bureaux" (newBureauEvent)="changeBureau($event)"></app-select-bureau>
         <app-participation [participation]="participation_zone"></app-participation>
         <app-candidats [candidats]="candidats_zone"></app-candidats>
     </div>
 
     <div id="infos_centre">
-        <app-select-bureau [bureaux]="bureaux" (newBureauEvent)="changeBureau($event)"></app-select-bureau>
         <app-participation *ngIf="bureau_selected != ''" [participation]="participation_bureau"></app-participation>
         <app-candidats *ngIf="bureau_selected != ''" [candidats]="candidats_bureau"></app-candidats>
     </div>

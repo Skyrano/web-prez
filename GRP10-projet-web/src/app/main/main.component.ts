@@ -10,60 +10,14 @@ import { DataRefinerService } from '../services/dataRefiner.service';
 export class MainComponent implements OnInit {
 
 
-  candidats_zone = [
-    {
-      name: 'Phillipe POUTOU',
-      voix: '900',
-      pourcentage: '56'
-    },
-    {
-      name: 'Albert DUPRES',
-      voix: '325',
-      pourcentage: '25'
-    },
-    {
-      name: 'Jacques CHEMINADE',
-      voix: '200',
-      pourcentage: '29'
-    },
-    {
-      name: 'Phillipe POUTOU',
-      voix: '900',
-      pourcentage: '56'
-    },
-    {
-      name: 'Albert DUPRES',
-      voix: '325',
-      pourcentage: '25'
-    },
-    {
-      name: 'Jacques CHEMINADE',
-      voix: '200',
-      pourcentage: '29'
-    },
-    {
-      name: 'Phillipe POUTOU',
-      voix: '900',
-      pourcentage: '56'
-    },
-    {
-      name: 'Albert DUPRES',
-      voix: '325',
-      pourcentage: '25'
-    },
-    {
-      name: 'Jacques CHEMINADE',
-      voix: '200',
-      pourcentage: '29'
-    }
-  ];
+  candidats_zone = [];
 
   participation_zone = {
-    pourcentage: 90,
-    inscrits: 6000,
-    blancs: 15,
-    nuls: 60,
-    exprimes: 5000
+    pourcentage: 0,
+    inscrits: 0,
+    blancs: 0,
+    nuls: 0,
+    exprimes: 0
   };
 
   candidats_bureau = [
@@ -114,17 +68,26 @@ export class MainComponent implements OnInit {
 
   bureaux = ["bureau 500", "bureau 501", "bureau 502"]; //input to select-bureau
   bureau_selected = ''; //output from select-bureau
+  resetBureaux: any[] = [{}];
 
   //event changement de bureau dans select-bureau
   changeBureau(newBureau: string) {
     this.bureau_selected = newBureau;
+    this.dataRefinerService.setBureauxSelected(this.bureau_selected);
+    this.dataRefinerService.fetchSpecificData();
+  }
+
+  recreateBureaux() {
+    console.log("recreating");
+
+    this.resetBureaux[0] = {};
   }
 
   annee_selected = "P17";
   tour_selected = "1";
   resetAnneeTour: any[] = [{}];
 
-   recreateSelectAnneeTour() {
+  recreateSelectAnneeTour() {
     this.resetAnneeTour[0] = {};
   }
 
@@ -148,14 +111,17 @@ export class MainComponent implements OnInit {
   participation: any;
 
   refeshSelectTourAnneeSubscription: Subscription;
+  refreshBureauxSubscription: Subscription;
 
+
+  bureauxSubscription: Subscription;
 
   constructor(private dataRefinerService: DataRefinerService) { }
 
   ngOnInit(): void {
-    this.dataSubscription = this.dataRefinerService.fullDataSubject.subscribe(
+    this.bureauxSubscription = this.dataRefinerService.bureauxNameListSubject.subscribe(
       (data: any) => {
-        this.data = data;
+        this.bureaux = data;
       }
     );
 
@@ -174,6 +140,12 @@ export class MainComponent implements OnInit {
     this.refeshSelectTourAnneeSubscription = this.dataRefinerService.refeshSelectTourAnneeSubject.subscribe(
       () => {
         this.recreateSelectAnneeTour();
+      }
+    );
+
+    this.refreshBureauxSubscription = this.dataRefinerService.refeshBureauxSubject.subscribe(
+      () => {
+        this.recreateBureaux();
       }
     );
   }

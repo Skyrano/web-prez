@@ -27,26 +27,17 @@ export class MapComponent implements OnInit {
         if (!this.dataRefinerService.getMapInitialized()) {
           this.init();
         }
-      }
-    );
-    this.zonesSubscription = this.dataRefinerService.zonesSubject.subscribe(
-      (refinedData: any) => {
-        this.zones = refinedData;
-        if (!this.dataRefinerService.getMapInitialized()) {
-          this.init();
-        }
+        this.mapRefresh();
       }
     );
   }
 
 
   init() {
-    if (this.bureaux != null && this.zones!= null) {
-      this.mapInit();
-      this.dataRefinerService.setMapInitialized();
-      this.dataRefinerService.changeSpecificData("P17","1","vi",null,null);
-      this.dataRefinerService.fetchSpecificData();
-    }
+    this.mapInit();
+    this.dataRefinerService.setMapInitialized();
+    this.dataRefinerService.changeSpecificData("P17","1","vi",null,null);
+    this.dataRefinerService.fetchSpecificData();
   }
 
 
@@ -59,32 +50,31 @@ export class MapComponent implements OnInit {
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
         attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
     }).addTo(this.mymap);
+  }
 
+  mapRefresh() {
     for (let i = 0; i < this.bureaux.length; i++) {
-      L.circle(this.bureaux[i], {
-        color: 'blue',
-        weight: 1,
-        fillOpacity: 0.5,
-        radius: 50
-      }).addTo(this.mymap);
-    }
+      if (this.bureaux[i].selected) {
+        L.circle(this.bureaux[i].point, {
+          color: 'red',
+          weight: 1,
+          fillOpacity: 0.5,
+          radius: 50
+        }).addTo(this.mymap);
 
-    for (let i = 0; i < this.zones.length; i++) {
-      if (this.zones[i][0].length < 3) {
-        L.polygon(this.zones[i], {
+        L.polygon(this.bureaux[i].polygone, {
           color: 'red',
           weight: 1,
           fillOpacity: 0}).addTo(this.mymap);
       }
       else {
-        for (let j = 0; j < this.zones[i][0].length.length; j++) {
-          L.polygon(this.zones[i][j], {
-            color: 'red',
-            weight: 1,
-            fillOpacity: 0}).addTo(this.mymap);
-        }
+        L.circle(this.bureaux[i].point, {
+          color: 'blue',
+          weight: 1,
+          fillOpacity: 0.5,
+          radius: 50
+        }).addTo(this.mymap);
       }
     }
   }
-
-}
+  }

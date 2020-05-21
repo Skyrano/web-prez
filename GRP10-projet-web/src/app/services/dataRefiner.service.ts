@@ -1,7 +1,6 @@
 import { Subscription, Subject } from 'rxjs';
 import { HttpClientService } from './httpclient.service';
 import { Injectable } from '@angular/core';
-import { SelectAnneeTourComponent } from '../select-annee-tour/select-annee-tour.component';
 
 @Injectable()
 
@@ -10,14 +9,11 @@ export class DataRefinerService {
   rawDataSubscription: Subscription;
   mapInitialized : boolean = false;
 
-  fullData: any;
-  fullDataSubject = new Subject<any>();
-
   bureaux: Array<any>;
   bureauxSubject = new Subject<Array<any>>();
 
-  zones: Array<any>;
-  zonesSubject = new Subject<Array<any>>();
+  bureauxNameList: Array<any>;
+  bureauxNameListSubject = new Subject<Array<any>>();
 
   listeCandidats: Array<any>;
   listeCandidatsSubject = new Subject<Array<any>>();
@@ -26,6 +22,7 @@ export class DataRefinerService {
   participationSubject = new Subject<any>();
 
   refeshSelectTourAnneeSubject = new Subject<any>();
+  refeshBureauxSubject = new Subject<any>();
 
   codeElection: string;
   numeroTour: string;
@@ -39,7 +36,6 @@ export class DataRefinerService {
   constructor(private httpClientService: HttpClientService) {
     this.rawDataSubscription = this.httpClientService.rawDataSubject.subscribe(
       (serverdata: any) => {
-        this.fullData = serverdata;
         if (this.getMapInitialized()) {
           this.refineParticipation(serverdata);
           this.refineCandidats(serverdata);
@@ -48,7 +44,8 @@ export class DataRefinerService {
         }
         else {
           this.refineMap(serverdata);
-          this.emitAllData();
+          this.reinitMap();
+          this.bureauxNameListSubject.next(this.bureauxNameList);
         }
       }
     );
@@ -58,8 +55,10 @@ export class DataRefinerService {
   reinitMap() {
     this.changeSpecificData(null,null,null,null,null);
     this.mapInitialized = false;
-    this.zonesSubject.next(this.zones);
+    this.setBureauxSelected("Tous les bureaux")
+    this.bureauxSubject.next(this.bureaux);
     this.refeshSelectTourAnneeSubject.next();
+    this.refeshBureauxSubject.next();
   }
 
   getMapInitialized() {
@@ -70,14 +69,12 @@ export class DataRefinerService {
     this.mapInitialized = true;
   }
 
-  emitAllData() {
-    this.fullDataSubject.next(this.fullData);
+  emitInitData() {
     this.bureauxSubject.next(this.bureaux);
-    this.zonesSubject.next(this.zones);
+
   }
 
   emitSpecificData() {
-    this.fullDataSubject.next(this.fullData);
     this.listeCandidatsSubject.next(this.listeCandidats);
     this.participationSubject.next(this.participation);
   }
@@ -120,30 +117,52 @@ export class DataRefinerService {
     this.candidats = candidats;
   }
 
+  setBureauxSelected(bureau: string) {
+    if (bureau == "Tous les bureaux") {
+      this.nomLieu = null;
+      this.niveauDetail = "vi";
+      for (let i = 0; i < this.bureaux.length; i++) {
+        this.bureaux[i].selected = false;
+      }
+    }
+    else {
+      this.nomLieu = bureau;
+      this.niveauDetail = "bu";
+      for (let i = 0; i < this.bureaux.length; i++) {
+        if(this.bureaux[i].nom == bureau) {
+          this.bureaux[i].selected = true;
+        }
+        else {
+          this.bureaux[i].selected = false;
+        }
+      }
+    }
+    this.bureauxSubject.next(this.bureaux);
+  }
+
 
   refineMap(rawdata: any) {
     this.bureaux = new Array();
-    var xpos = new Array();
-    for (let i = 0; i < rawdata.nhits ; i++) {
-      if (rawdata.records[i].fields.hasOwnProperty('geo_point') && xpos.indexOf(rawdata.records[i].fields.geo_point[0]) == -1) {
-        this.bureaux.push(rawdata.records[i].fields.geo_point);
-        xpos.push(rawdata.records[i].fields.geo_point[0]);
-      }
-    }
-
-    this.zones = new Array();
-    xpos = new Array();
+    this.bureauxNameList = new Array();
 
     for (let i = 0; i < rawdata.nhits ; i++) {
-      if (rawdata.records[i].fields.hasOwnProperty('geo_shape') && xpos.indexOf(rawdata.records[i].fields.geo_shape.coordinates[0][0][1]) == -1) {
-        var coordinates = new Array();
-        for (let j = 0; j < rawdata.records[i].fields.geo_shape.coordinates[0].length; j++) {
-          coordinates.push(rawdata.records[i].fields.geo_shape.coordinates[0][j].reverse());
+      if (rawdata.records[i].fields.hasOwnProperty('nom_lieu') && rawdata.records[i].fields.hasOwnProperty('geo_point')) {
+        let index = this.bureauxNameList.indexOf(rawdata.records[i].fields.nom_lieu);
+        if (index == -1) {
+          var polygone = new Array();
+          for (let j = 0; j < rawdata.records[i].fields.geo_shape.coordinates[0].length; j++) {
+            polygone.push(rawdata.records[i].fields.geo_shape.coordinates[0][j].reverse());
+          }
+          this.bureaux.push({nom: rawdata.records[i].fields.nom_lieu,
+                            point: rawdata.records[i].fields.geo_point,
+                            polygone: polygone,
+                            selected: false});
+          this.bureauxNameList.push(rawdata.records[i].fields.nom_lieu);
         }
-        this.zones.push(coordinates);
-        xpos.push(this.zones[this.zones.length-1][0][0])
       }
     }
+
+    this.bureauxNameList.splice(0,0,"Tous les bureaux")
   }
 
 
