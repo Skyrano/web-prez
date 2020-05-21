@@ -102,14 +102,4 @@ export class MainComponent implements OnInit {
     );
   }
 
-
-  onFetch() {
-    this.dataRefinerService.changeSpecificData("P17","1","vi",null,null);
-    this.dataRefinerService.fetchSpecificData();
-  }
-
-
-
-
-
 }
