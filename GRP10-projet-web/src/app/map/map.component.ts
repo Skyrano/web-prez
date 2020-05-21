@@ -46,7 +46,6 @@ export class MapComponent implements OnInit {
     this.dataRefinerService.fetchSpecificData();
   }
 
-
   mapInit() {
 
     this.mapRemove();
@@ -66,6 +65,13 @@ export class MapComponent implements OnInit {
         radius: 50
       }));
       this.listCircles[i].addTo(this.mymap);
+      this.listCircles[i].on('click',(e) => {this.dataRefinerService.changeBureauxSelected(this.bureaux[i].nom)} );
+
+      var popup = L.popup();
+      this.listCircles[i].on('mouseover',(e) => {popup
+                                                    .setLatLng(e.latlng)
+                                                    .setContent(this.bureaux[i].nom)
+                                                    .openOn(this.mymap);} );
     }
   }
 

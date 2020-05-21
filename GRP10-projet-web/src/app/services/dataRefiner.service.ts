@@ -14,6 +14,8 @@ export class DataRefinerService {
   bureaux: Array<any>;
   bureauxSubject = new Subject<Array<any>>();
 
+  bureauSelectedSubject = new Subject<String>();
+
   bureauxNameList: Array<any>;
   bureauxNameListSubject = new Subject<Array<any>>();
 
@@ -135,6 +137,10 @@ export class DataRefinerService {
       }
     }
     this.bureauxSubject.next(this.bureaux);
+  }
+
+  changeBureauxSelected(bureau: string) {
+    this.bureauSelectedSubject.next(bureau);
   }
 
 
