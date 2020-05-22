@@ -30,10 +30,8 @@
 
 /* Chrome 29+ */
 .selector:not(*:root), .candidat_inner_bar {
-    background-color: var(--dark-color);
     height: 10px;
     position: relative;
     top: -1px;
     left: -1px;
-    //width définie en fonction du résultat du candidat
 }
