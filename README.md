@@ -10,13 +10,13 @@ Getting Started :
 
 - Une fois npm installé, changez le répertoire courant vers le dossier GRP10-projet-web.
 
-- L'installation du framework Angular Core et CLI en tant que bibliothèques globales est recommandée pour déboguer mais pas obligatoire dans le cas d'une simple utilisation du site web sans modification. L'installation peut se faire avec les commandes "npm install -g npm@latest" et "npm install -g @angular/cli" (il faudra sûrement lancer ces commandes en temps qu'administrateur/sudo). Sans ces bibliothèques mises en global, les commandes peuvent normalement toujours être lancées depuis le dossier racine de l'application mais l'utilisation de commandes plus complexes de ng par exemple sera moins pratique.    
+- Installez le framework Angular Core et CLI en tant que bibliothèques globales pour pouvoir lancer l'application. L'installation peut se faire avec les commandes "npm install -g npm@latest" et "npm install -g @angular/cli" (il faudra sûrement lancer ces commandes en temps qu'administrateur/sudo).  
 
 - Ensuite, lancez la commande "npm install" qui va installer automatiquement le reste des dépendances requises pour l'application, qui sont listées dans le fichier package.json.
 
 - Si certains paquets présentent des vulnérabilités à cause de paquets listés dans package.json dans lesquels on aurait trouvé des failles récemment, il est possible de fixer automatiquement les failles demandant une simple mise à jour à l'aide la commande "npm audit fix".
 
-- Une fois toutes les dépendances installées, il suffit de lancer la commande "ng serve" depuis ce dossier racine pour lancer l'application web. Après compilation des sources, celle-ci sera accessible à l'adresse http://localhost:4200/ (par défaut) depuis le navigateur. Dans le cas ou ng ne se serait pas installé (cela semble arriver sur certaines installations), l'installation de Angular CLI est obligatoire (voir 3ème point).
+- Une fois toutes les dépendances installées, il suffit de lancer la commande "ng serve" depuis ce dossier racine pour lancer l'application web. Après compilation des sources, celle-ci sera accessible à l'adresse http://localhost:4200/ (par défaut) depuis le navigateur.
 
 Utilisation :
 
