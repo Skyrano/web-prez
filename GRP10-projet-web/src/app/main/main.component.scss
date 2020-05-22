@@ -5,10 +5,13 @@
     flex-flow: row wrap;
 
     //marge de 20px autour
-    margin: 20px;
+    margin-right: 10px;
+    margin-left: 10px;
+    margin-top: 20px;
+    margin-bottom: 20px;
 
     //20px entre les différentes colonnes, permet de ne pas avoir de marge si retour à la ligne
-    column-gap: 20px;
+    //column-gap: 20px; //fonctionne uniquement sur firefox
 }
 
 //carte
@@ -25,6 +28,11 @@ app-map {
     //espace de 20 px en dessous
     margin-bottom: 20px;
   }
+
+app-map, #infos_zone {
+    margin-right: 10px;
+    margin-left: 10px;
+}
 
 #infos_zone > h3 {
     //couleur du titre "centre de vote"
