@@ -18,6 +18,8 @@ Getting Started :
 
 - Une fois toutes les dépendances installées, il suffit de lancer la commande "ng serve" depuis ce dossier racine pour lancer l'application web. Après compilation des sources, celle-ci sera accessible à l'adresse http://localhost:4200/ (par défaut) depuis le navigateur.
 
+Utilisation :
+
 L'application se présente sous la forme d'une single page application composée d'une zone centrale contenant les informations et de 2 zones aux extrémités hautes et basses permettant d'accéder à d'autres informations. Une présentation des différentes parties :
 - La page Accueil affichée par défaut est la page principale de l'application, et permet d'afficher toutes les informations liées aux élections. Cette zone est principalement composée d'une carte (centrée sur Rennes par défaut) et d'une zone indiquant la liste des candidats ainsi que leur score respectif. Trois menus déroulants (deux au dessus de la carte, un au dessus des candidats) permettent de changer ou préciser les informations voulues (une autre élection, un autre tour ou les informations d'un bureau particulier). De plus, les emplacements des bureaux apparaissent sur la carte et il est possible de cliquer dessus afin d'afficher les informtaions électorales de ceux-ci. 
 
