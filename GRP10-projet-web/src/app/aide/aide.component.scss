@@ -1,0 +1,31 @@
+#aide_container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+#aide {
+  max-width: 800px;
+  margin: 20px;
+}
+
+.titre {
+  margin-top: 20px;
+  color: var(--dark-color);
+}
+
+.paragraphe {
+  text-indent: 50px;
+  color: var(--medium-dark-color);
+  text-align: justify;
+}
+
+ul {
+  text-indent: 50px;
+  color: var(--medium-dark-color);
+  text-align: justify;
+}
+
+li {
+  margin-top: 20px;
+}

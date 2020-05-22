@@ -59,10 +59,10 @@ export class MapComponent implements OnInit {
 
     for (let i = 0; i < this.bureaux.length; i++) {
       this.listCircles.push(L.circle(this.bureaux[i].point, {
-        color: 'blue',
+        color: '#0000c1',
         weight: 1,
-        fillOpacity: 0.5,
-        radius: 50
+        fillOpacity: 0.4,
+        radius: 70
       }));
       this.listCircles[i].addTo(this.mymap);
       this.listCircles[i].on('click',(e) => {this.dataRefinerService.changeBureauxSelected(this.bureaux[i].nom)} );
@@ -83,7 +83,7 @@ export class MapComponent implements OnInit {
     for (let i = 0; i < this.bureaux.length; i++) {
       if (this.bureaux[i].selected) {
         this.selectedCircle = L.circle(this.bureaux[i].point, {
-          color: 'red',
+          color: '#af0000',
           weight: 1,
           fillOpacity: 1,
           radius: 80

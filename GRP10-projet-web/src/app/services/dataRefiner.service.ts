@@ -104,18 +104,6 @@ export class DataRefinerService {
     this.numeroTour = numeroTour;
   }
 
-  setNiveauDetail(niveauDetail: string) {
-    this.niveauDetail = niveauDetail;
-  }
-
-  setNomLieu(nomLieu: string) {
-    this.nomLieu = nomLieu;
-  }
-
-  setCandidats(candidats: Array<string>) {
-    this.candidats = candidats;
-  }
-
   setBureauxSelected(bureau: string) {
     if (bureau == "Tous les centres") {
       this.nomLieu = null;
