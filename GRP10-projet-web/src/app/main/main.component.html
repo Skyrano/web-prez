@@ -1,5 +1,3 @@
-<!-- module de sélection de l'année et du tour-->
-<app-select-annee-tour *ngFor="let r of resetAnneeTour" (newAnneeTourEvent)="changeAnneeTour($event)"></app-select-annee-tour>
 
 <!-- module d'affichage des infos du tour sélectionné-->
 <div id="infos_principales">
@@ -9,6 +7,8 @@
 
     <!-- affichage des résultats de Rennes ou du centre (si sélectionné) -->
     <div id="infos_zone">
+        <!-- module de sélection de l'année et du tour-->
+        <app-select-annee-tour *ngFor="let r of resetAnneeTour" (newAnneeTourEvent)="changeAnneeTour($event)"></app-select-annee-tour>
         <app-select-bureau *ngFor="let r of resetBureaux" [bureaux]="bureaux" (newBureauEvent)="changeBureau($event)"></app-select-bureau>
         <app-participation [participation]="participation_bureau"></app-participation>
         <app-candidats [candidats]="candidats_bureau"></app-candidats>

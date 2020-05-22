@@ -3,6 +3,7 @@
     //affichage en ligne, avec retour à la ligne si trop petit
     display: flex;
     flex-flow: row wrap;
+    justify-content: center;
 
     //marge de 20px autour
     margin-right: 10px;
@@ -39,11 +40,4 @@ app-map, #infos_zone {
 #infos_zone > h3 {
     //couleur du titre "centre de vote"
     color: var(--medium-dark-color);
-}
-
-@media screen and (max-width: 640px) {
-    //pour les téléphones / tablettes affichage en colonne
-    #infos_principales {
-        flex-direction: column;
-    }
 }
