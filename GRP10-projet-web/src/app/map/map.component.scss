@@ -3,6 +3,10 @@
   width: 100%;
   height: 100%;
 
+  //hauteur entre 80 et 90% de la hauteur de l'ecran
+  min-height: 80vh;
+  max-height: 90vh;
+
   border: 1px solid var(--dark-color);
   resize: vertical; //possibilité d'être étiré verticalement
   overflow: hidden;
@@ -12,10 +16,8 @@
 #map {
   height: 100%;
   width: 100%;
-}
 
-@media screen and (max-width: 640px) {
-  #map_container {
-    height: 300px;
-  }
+  //hauteur entre 80 et 90% de la hauteur de l'ecran
+  min-height: 80vh;
+  max-height: 90vh;
 }

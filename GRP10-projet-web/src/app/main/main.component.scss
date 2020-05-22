@@ -18,9 +18,11 @@
 app-map {
     //largeur minimale de 50%
     min-width: 50%;
+    max-width: 800px;
 
-    //hauteur minimale de 300px
-    min-height: 300px;
+    //hauteur entre 80 et 90% de la hauteur de l'ecran
+    min-height: 80vh;
+    max-height: 90vh;
 
     //étirement en largeur
     flex-grow: 1;
