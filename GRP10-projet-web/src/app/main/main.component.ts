@@ -7,12 +7,14 @@ import { DataRefinerService } from '../services/dataRefiner.service';
   templateUrl: './main.component.html',
   styleUrls: ['./main.component.scss']
 })
+
+//Récupère les données pour les transmettre vers les composants inférieurs
 export class MainComponent implements OnInit {
 
-  candidats_bureau = [
+  candidats_bureau = [ //la liste des candidats
   ];
 
-  participation_bureau = {
+  participation_bureau = { //la participation
     pourcentage: 0,
     inscrits: 0,
     blancs: 0,
@@ -22,51 +24,24 @@ export class MainComponent implements OnInit {
 
   bureaux = []; //input to select-bureau
   bureau_selected = ''; //output from select-bureau
-  resetBureaux: any[] = [{}];
+  resetBureaux: any[] = [{}]; //permet de reset la liste des bureaux à l'aide de *ngFor
 
-  //event changement de bureau dans select-bureau
-  changeBureau(newBureau: string) {
-    this.bureau_selected = newBureau;
-    this.dataRefinerService.setBureauxSelected(this.bureau_selected);
-    this.dataRefinerService.fetchSpecificData();
-  }
+  bureauxSubscription: Subscription; //Pour aller chercher la liste des bureaux
 
-  recreateBureaux() {
-    this.resetBureaux[0] = {};
-  }
-
-  annee_selected = "P17";
-  tour_selected = "1";
-  resetAnneeTour: any[] = [{}];
-
-  recreateSelectAnneeTour() {
-    this.resetAnneeTour[0] = {};
-  }
+  annee_selected = "P17"; //année sélectionné
+  tour_selected = "1"; //tour sélectionné
+  resetAnneeTour: any[] = [{}]; //permet de reset la liste des années et tours
 
 
-  changeAnneeTour(newAnneeTour){
-    this.annee_selected = newAnneeTour[0];
-    this.tour_selected = newAnneeTour[1];
-
-    this.dataRefinerService.setCodeElection(this.annee_selected);
-    this.dataRefinerService.setNumeroTour(this.tour_selected);
-    this.dataRefinerService.fetchSpecificData();
-  }
-
-  dataSubscription: Subscription;
-  data: any;
-
-  candidatsSubscription: Subscription;
+  candidatsSubscription: Subscription; //Pour aller chercher la liste des candidats
   candidats: any;
 
-  participationSubscription: Subscription;
+  participationSubscription: Subscription; //Pour aller chercher la participation
   participation: any;
 
-  refeshSelectTourAnneeSubscription: Subscription;
-  refreshBureauxSubscription: Subscription;
+  refeshSelectTourAnneeSubscription: Subscription; //vérifier si la liste des tours et années a changé
+  refreshBureauxSubscription: Subscription; //vérifier si la liste des bureaux a changé
 
-
-  bureauxSubscription: Subscription;
 
   constructor(private dataRefinerService: DataRefinerService) { }
 
@@ -100,6 +75,33 @@ export class MainComponent implements OnInit {
         this.recreateBureaux();
       }
     );
+  }
+
+  //event changement de bureau dans select-bureau
+  changeBureau(newBureau: string) {
+    this.bureau_selected = newBureau;
+    this.dataRefinerService.setBureauxSelected(this.bureau_selected); //si le bureau a changé on informe le service de refining du changement et on rafraichit les données
+    this.dataRefinerService.fetchSpecificData();
+  }
+
+//Reset la liste des bureaux
+  recreateBureaux() {
+    this.resetBureaux[0] = {}; //le changement artificiel de cete liste va faire recharger la structure *ngFor
+  }
+
+  //Reset la liste des années et tours
+  recreateSelectAnneeTour() {
+    this.resetAnneeTour[0] = {}; //comme pour les bureaux, on fait un changement artificiel de la liste pour recharger le *ngFor
+  }
+
+//Event de changement de l'année ou tour sélectionné
+  changeAnneeTour(newAnneeTour){
+    this.annee_selected = newAnneeTour[0];
+    this.tour_selected = newAnneeTour[1];
+
+    this.dataRefinerService.setCodeElection(this.annee_selected); //on informe le service de refining du changement et on rafraichit les données des candidats
+    this.dataRefinerService.setNumeroTour(this.tour_selected);
+    this.dataRefinerService.fetchSpecificData();
   }
 
 }

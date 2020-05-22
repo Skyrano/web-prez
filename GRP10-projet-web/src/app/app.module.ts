@@ -1,3 +1,11 @@
+/* Projet Web
+Kiéran GOYAT
+Alistair RAMEAU
+Cybersécurité du logiciel
+1re année
+*/
+
+
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
@@ -25,7 +33,7 @@ import { SelectBureauComponent } from './select-bureau/select-bureau.component';
 
 
 @NgModule({
-  declarations: [
+  declarations: [ //on déclare tous les composants utilisés
     AppComponent,
     MenuComponent,
     ErreurComponent,
@@ -42,13 +50,13 @@ import { SelectBureauComponent } from './select-bureau/select-bureau.component';
     SelectAnneeTourComponent,
     SelectBureauComponent
   ],
-  imports: [
+  imports: [   //on déclare les bibliothèques importées
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
     FormsModule
   ],
-  providers: [
+  providers: [  //on donne la liste des services
     ErrorManager,
     HttpClientService,
     DataRefinerService

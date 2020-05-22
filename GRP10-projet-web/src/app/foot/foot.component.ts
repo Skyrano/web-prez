@@ -1,19 +1,16 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-foot',
   templateUrl: './foot.component.html',
   styleUrls: ['./foot.component.scss']
 })
-export class FootComponent implements OnInit {
+export class FootComponent {
 
   constructor() { }
 
-  ngOnInit(): void {
-  }
-
+  //retourne en haut de la page
   goToTop() {
-    //retourne en haut de la page
     window.scrollTo(0,0);
   }
 

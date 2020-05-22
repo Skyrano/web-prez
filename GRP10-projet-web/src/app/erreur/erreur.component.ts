@@ -1,4 +1,4 @@
-import { Component, Input,  OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { ErrorManager } from '../services/error.service';
 
 @Component({
@@ -6,11 +6,11 @@ import { ErrorManager } from '../services/error.service';
   templateUrl: './erreur.component.html',
   styleUrls: ['./erreur.component.scss']
 })
-export class ErreurComponent implements OnInit {
+
+//Affiche le bordereau d'erreur
+export class ErreurComponent {
 
   //récupération du gestionnaire d'erreur à la construction
   constructor(public errorManager: ErrorManager) { }
-
-  ngOnInit(): void { }
 
 }

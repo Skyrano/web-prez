@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { DataRefinerService } from '../services/dataRefiner.service';
 
 @Component({
@@ -6,13 +6,13 @@ import { DataRefinerService } from '../services/dataRefiner.service';
   templateUrl: './menu.component.html',
   styleUrls: ['./menu.component.scss']
 })
-export class MenuComponent implements OnInit {
+
+//Menu situé en haut de la page
+export class MenuComponent {
 
   constructor(private dataRefinerService: DataRefinerService) { }
 
-  ngOnInit(): void {
-  }
-
+  //lancé lors de l'appui sur le bouton Accueil ou le titre pour afficher et rafraichir la carte
   onRefresh() {
     this.dataRefinerService.reinitMap();
   }

@@ -2,17 +2,18 @@ import { HttpClient } from "@angular/common/http";
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
 
-@Injectable()
+@Injectable() //ce service sera utilisé ailleurs et doit donc être injectable dans un autre component
 
+//Ce service permet d'envoyer et recevoir la réponse du serveur de Rennes Métropole
 export class HttpClientService {
 
-
+  //on déclare le lien de l'API initial
   private datalink: string = "https://data.rennesmetropole.fr/api/records/1.0/search/?dataset=resultats-des-elections-presidentielles-a-rennes-depuis-2007&q=&rows=1000";
 
-  private rawData: any;
-  rawDataSubject = new Subject<any>();
+  private rawData: any;  //contiendra les données brutes recueillies avec l'API
+  rawDataSubject = new Subject<any>(); //sujet pour emmetre les données brutes
 
-  constructor(private httpClient: HttpClient) {}
+  constructor(private httpClient: HttpClient) {} //on utilise le client http d'Angular Common
 
   emitRawData() {
     this.rawDataSubject.next(this.rawData);
@@ -21,7 +22,7 @@ export class HttpClientService {
   loadDataFromServer() {
     console.log(this.datalink);
     this.httpClient.get(this.datalink).subscribe(
-      (response) => {
+      (response) => {   //quand on recoit une réponse, on émet celles-ci avec le sujet des données brutes
         this.rawData = response;
         console.log(response);
         this.emitRawData();

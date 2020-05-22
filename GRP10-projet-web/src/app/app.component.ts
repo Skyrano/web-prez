@@ -1,3 +1,10 @@
+/* Projet Web
+Kiéran GOYAT
+Alistair RAMEAU
+Cybersécurité du logiciel
+1re année
+*/
+
 import { Component, OnInit } from '@angular/core';
 import { ErrorManager } from './services/error.service';
 

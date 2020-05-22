@@ -7,7 +7,7 @@ WORKDIR /usr/src
 # Copy the file from your host to your current location.
 COPY package.json .
 
-# Installation des dépendances manquantes
+# Installation of dependancies
 RUN sudo npm install -g npm-install-peers
 
 # Run the command inside your image filesystem.

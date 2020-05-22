@@ -1,17 +1,14 @@
-import { Component, OnInit } from '@angular/core';
-import { ErrorManager } from '../services/error.service';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-four-ofour',
   templateUrl: './four-ofour.component.html',
   styleUrls: ['./four-ofour.component.scss']
 })
-export class FourOfourComponent implements OnInit {
 
-  constructor(private errorManager: ErrorManager) { }
+//Gère l'erreur 404 si aucune page ne correspond
+export class FourOfourComponent {
 
-  ngOnInit() {
-      //this.errorManager.print_error("Erreur 404 : Page introuvable");
-   }
+  constructor() { }
 
 }

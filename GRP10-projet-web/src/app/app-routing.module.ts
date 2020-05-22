@@ -7,7 +7,7 @@ import { AideComponent } from './aide/aide.component';
 import { MentionLegalesComponent } from './mention-legales/mention-legales.component';
 
 
-const routes: Routes = [
+const routes: Routes = [   //on créé une table de routing des différentes vues
   {path: '', component: MainComponent},
   {path: 'contact', component: ContactComponent},
   {path: 'aide', component: AideComponent},
@@ -16,7 +16,7 @@ const routes: Routes = [
   {path: '**', redirectTo: '/not-found'}
 ];
 
-@NgModule({
+@NgModule({     //on indique au module de rootage notre table de routing
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
 })

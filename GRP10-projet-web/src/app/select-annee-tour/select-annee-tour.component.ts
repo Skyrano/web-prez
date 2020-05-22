@@ -1,25 +1,24 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-select-annee-tour',
   templateUrl: './select-annee-tour.component.html',
   styleUrls: ['./select-annee-tour.component.scss']
 })
-export class SelectAnneeTourComponent implements OnInit {
 
-  annee_value: String = "P17";
+//Menu déroulant de sélection de l'année et du tou
+export class SelectAnneeTourComponent {
+
+  annee_value: String = "P17"; //valeurs par défaut
   tour_value: String = "1";
 
   //évènement output
-  @Output() newAnneeTourEvent = new EventEmitter();
+  @Output() newAnneeTourEvent = new EventEmitter(); //émet si l'utilisateur change de paramètre
 
   constructor() { }
 
-  ngOnInit(): void {
-  }
-
   //déclenche un évènement dans le component parent
   onChange(){
-    this.newAnneeTourEvent.emit([this.annee_value, this.tour_value]);
+    this.newAnneeTourEvent.emit([this.annee_value, this.tour_value]); //on envoie les nouveaux paramètres
   }
 }

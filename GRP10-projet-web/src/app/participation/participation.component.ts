@@ -1,19 +1,18 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'app-participation',
   templateUrl: './participation.component.html',
   styleUrls: ['./participation.component.scss']
 })
-export class ParticipationComponent implements OnInit {
+
+//Affichage de la participation
+export class ParticipationComponent {
 
   //données concernant la participation
   @Input() participation;
 
   constructor() { }
-
-  ngOnInit(): void {
-  }
 
   //renvoie le pourcentage sous une forme adaptée pour la mise en style
   getPourcentage(){
