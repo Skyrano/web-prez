@@ -4,7 +4,7 @@ import { Subject } from 'rxjs';
 
 @Injectable() //ce service sera utilisé ailleurs et doit donc être injectable dans un autre component
 
-//Ce service permet d'envoyer et recevoir la réponse du serveur de Rennes Métropole
+//Ce service permet d'envoyer une requête et recevoir la réponse du serveur de Rennes Métropole
 export class HttpClientService {
 
   //on déclare le lien de l'API initial

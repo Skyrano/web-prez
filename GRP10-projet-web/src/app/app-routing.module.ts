@@ -7,13 +7,13 @@ import { AideComponent } from './aide/aide.component';
 import { MentionLegalesComponent } from './mention-legales/mention-legales.component';
 
 
-const routes: Routes = [   //on créé une table de routing des différentes vues
-  {path: '', component: MainComponent},
+const routes: Routes = [   //on crée une table de routing des différentes vues
+  {path: '', component: MainComponent}, //page par défaut
   {path: 'contact', component: ContactComponent},
   {path: 'aide', component: AideComponent},
   {path: 'mention_legales', component: MentionLegalesComponent},
   {path: 'not-found', component: FourOfourComponent},
-  {path: '**', redirectTo: '/not-found'}
+  {path: '**', redirectTo: '/not-found'} //tous les autres cas, erreur 404
 ];
 
 @NgModule({     //on indique au module de rootage notre table de routing

@@ -11,8 +11,8 @@ import { DataRefinerService } from '../services/dataRefiner.service';
 //Récupère les données pour les transmettre vers les composants inférieurs
 export class MainComponent implements OnInit {
 
-  candidats_bureau = [ //la liste des candidats
-  ];
+  candidats_bureau = []; //la liste des candidats, vide par défaut
+  candidatsSubscription: Subscription; //Pour aller chercher la liste des candidats
 
   participation_bureau = { //la participation
     pourcentage: 0,
@@ -21,23 +21,20 @@ export class MainComponent implements OnInit {
     nuls: 0,
     exprimes: 0
   };
+  participationSubscription: Subscription; //Pour aller chercher la participation
 
   bureaux = []; //input to select-bureau
+  bureauxSubscription: Subscription; //Pour aller chercher la liste des bureaux
+
+
   bureau_selected = ''; //output from select-bureau
   resetBureaux: any[] = [{}]; //permet de reset la liste des bureaux à l'aide de *ngFor
 
-  bureauxSubscription: Subscription; //Pour aller chercher la liste des bureaux
 
   annee_selected = "P17"; //année sélectionné
   tour_selected = "1"; //tour sélectionné
   resetAnneeTour: any[] = [{}]; //permet de reset la liste des années et tours
 
-
-  candidatsSubscription: Subscription; //Pour aller chercher la liste des candidats
-  candidats: any;
-
-  participationSubscription: Subscription; //Pour aller chercher la participation
-  participation: any;
 
   refeshSelectTourAnneeSubscription: Subscription; //vérifier si la liste des tours et années a changé
   refreshBureauxSubscription: Subscription; //vérifier si la liste des bureaux a changé

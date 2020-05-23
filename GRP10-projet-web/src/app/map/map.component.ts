@@ -72,6 +72,7 @@ export class MapComponent implements OnInit {
                                                     .openOn(this.mymap);} );
     }
   }
+
 //Rafraichit la carte avec le bureau sélectionné
   mapRefresh() {
     if (this.selectedCircle != null) {  //si il existait déja un bureau sélectionné on le supprime de la carte
@@ -86,7 +87,9 @@ export class MapComponent implements OnInit {
           fillOpacity: 1,
           radius: 80
         });
-        this.selectedCircle.addTo(this.mymap);
+        if (this.selectedCircle != null) { //si aucun bureau n'est sélectionné alors on n'ajoute pas de point
+          this.selectedCircle.addTo(this.mymap);
+        }
       }
     }
   }

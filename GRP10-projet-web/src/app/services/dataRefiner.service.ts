@@ -29,7 +29,7 @@ export class DataRefinerService {
   refeshSelectTourAnneeSubject = new Subject<any>(); //émet pour rafraichir les menus déroulants de sélection
   refeshBureauxSubject = new Subject<any>(); //émet pour rafraichir le menu de sélection des bureaux
 
-  //informations voulues par l'utilisateurs, utilisées pour crééer la requête à envoyer au serveur
+  //informations voulues par l'utilisateurs, utilisées pour créer la requête à envoyer au serveur
   codeElection: string;
   numeroTour: string;
   niveauDetail: string;
@@ -42,20 +42,20 @@ export class DataRefinerService {
   constructor(private httpClientService: HttpClientService, private errorService: ErrorManager) {
     this.rawDataSubscription = this.httpClientService.rawDataSubject.subscribe(
       (serverdata: any) => {
-        if (this.getMapInitialized()) { //si la carte est déja initialisée (mode de fonctionnement nominal)
+        if (this.getMapInitialized()) { //si la carte est déjà initialisée (mode de fonctionnement nominal)
           this.refineParticipation(serverdata);  //on raffine les informations sur les candidats et la participation
           this.refineCandidats(serverdata);
           this.calculPourcentageCandidats(); //et on calcule le pourcentage des candidats
           this.emitSpecificData(); //puis ont émet ces informations
         }
         else { //si la carte n'est pas encore initialisée (première ouverture ou réinitialisation de la carte après appui sur accueil par exemple)
-          this.refineMap(serverdata); //on rafine les informations à propos de la carte
+          this.refineMap(serverdata); //on raffine les informations à propos de la carte
           this.reinitMap(); //et on les envoie
         }
       }
     );
-    this.fetchAllData(); //point d'entrée de l'application (hors composant principaux comme index.html et app.component) : on va chercher une première fois toutes les données
-                          //de l'API des élections pour raffiner les infos de la carte lors du lancement de ce service
+    this.fetchAllData(); //point d'entrée de l'application (hors composants initiaux comme index.html et app.component) : on va chercher une première
+                        //fois toutes les données de l'API des élections pour raffiner les infos de la carte lors du lancement de ce service
   }
 
   //Cette fonction réinitialise la carte après le retour vers l'accueil de l'application
