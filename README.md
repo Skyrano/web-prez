@@ -18,7 +18,7 @@ Getting Started :
 
 - Si certains paquets présentent des vulnérabilités à cause de paquets listés dans package.json dans lesquels on aurait trouvé des failles récemment, il est possible de fixer automatiquement les failles demandant une simple mise à jour à l'aide la commande "npm audit fix".
 
-- Une fois toutes les dépendances installées, il suffit de lancer la commande "ng serve" depuis ce dossier racine pour lancer l'application web. Après compilation des sources, celle-ci sera accessible à l'adresse http://localhost:4200/ (par défaut) depuis le navigateur.
+- Une fois toutes les dépendances installées, il suffit de lancer la commande "ng serve" depuis ce dossier pour lancer l'application web. Après compilation des sources, celle-ci sera accessible à l'adresse http://localhost:4200/ (par défaut) depuis le navigateur.
 
 Utilisation :
 
