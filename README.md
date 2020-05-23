@@ -1,5 +1,7 @@
 Application web réalisée par Kiéran Goyat et Alistair Rameau
 
+Github : https://github.com/Skyrano/web-prez
+
 Cette application permet de visualiser les informations sur les résultats des élections présidentielles à Rennes pour les années 2007 à 2017.
 
 Compatibilité : Testé positivement avec Google Chrome, Mozilla Firefox et Microsoft Edge.
